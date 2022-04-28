@@ -120,6 +120,11 @@ class Pawn(ChessPiece):
                             moves.append((row, col))
         return moves
 
+    def __repr__(self):
+        if self.is_white():
+            return("p")
+        return("P")
+
 
 class Rook(ChessPiece):
     """
@@ -152,6 +157,11 @@ class Rook(ChessPiece):
                 else:
                     break
         return moves
+
+    def __repr__(self):
+        if self.is_white():
+            return("r")
+        return("R")
 
 
 class Bishop(ChessPiece):
@@ -186,6 +196,11 @@ class Bishop(ChessPiece):
                     break
         return moves
 
+    def __repr__(self):
+        if self.is_white():
+            return("b")
+        return("B")
+
 
 class Knight(ChessPiece):
     """
@@ -217,6 +232,11 @@ class Knight(ChessPiece):
             else:
                 break
         return moves
+
+    def __repr__(self):
+        if self.is_white():
+            return("n")
+        return("N")
 
 
 class Queen(ChessPiece):
@@ -253,6 +273,11 @@ class Queen(ChessPiece):
                     break
         return moves
 
+    def __repr__(self):
+        if self.is_white():
+            return("q")
+        return("Q")
+
 
 class King(ChessPiece):
     """
@@ -286,3 +311,8 @@ class King(ChessPiece):
             else:
                 break
         return moves
+
+    def __repr__(self):
+        if self.is_white():
+            return("k")
+        return("K")
