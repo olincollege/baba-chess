@@ -152,8 +152,6 @@ class Rook(ChessPiece):
                 else:
                     break
         return moves
-                
-        
 
 
 class Bishop(ChessPiece):
@@ -187,7 +185,6 @@ class Bishop(ChessPiece):
                 else:
                     break
         return moves
-    
 
 
 class Knight(ChessPiece):
@@ -220,7 +217,6 @@ class Knight(ChessPiece):
             else:
                 break
         return moves
-    
 
 
 class Queen(ChessPiece):
@@ -290,6 +286,3 @@ class King(ChessPiece):
             else:
                 break
         return moves
-    
-        
-        
