@@ -1,8 +1,8 @@
-."""
+"""
 Main program to set up and run a game of chess.
 """
 from chess_board import ChessBoard
-from chess_pieces import Pawn Rook Bishop Knight Queen King
+from chess_pieces import Pawn, Rook, Bishop, Knight, Queen, King
 from chess_view import TextView
 from chess_controller import TextController
 
@@ -17,23 +17,23 @@ def main():
     board = ChessBoard()
     view = TextView(board)
     controllers = {
-        white: TextController(board),
-        black: TextController(board),
+        "white": TextController(board),
+        "black": TextController(board),
     }
     current_player = None
     
     #TODO find a win condition so this isn't an infinite loop
     while True:
         if board.next_player():
-            current_player = white
+            current_player = controllers["white"]
         else:
-            current_player = black
+            current_player = controllers["black"]
         if controllers[current_player].quit():
             break
         view.draw()
         controllers[current_player].move()
         view.draw()
-    print(f"{current_player" has ended the game.")
+    print(f"{current_player} has ended the game.")
 
 if __name__ == "__main__":
     main()
