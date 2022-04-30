@@ -42,7 +42,9 @@ class ChessBoard:
         Returns:
             A bool representing.
         """
-        return self._next_player
+        if self._next_player == self.player_1_color:
+            return True
+        return False
     
     def get_square_properties(self, row, column):
         pass

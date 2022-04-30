@@ -49,7 +49,8 @@ class TextController(ChessController):
                                 "column_end):")
 
             input_number_list = [i for i in input_number.split(", ")]
-            print(input_number_list)
+            #print(input_number_list) #TODO I'm not sure what this is for,
+            # commented out for now - Drew
             coordinates = []
             for coords in input_number_list:
                 coordinates += [int(i) for i in coords.split()]

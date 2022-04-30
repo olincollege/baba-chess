@@ -42,4 +42,4 @@ class TextView(ChessView):
         print(self.board)
         #! Make sure that whatever the next_move function becomes in the future
         #! is changed here as well
-        print(f"It is now {self.board.next_move()}'s turn.")
+        print(f"It is now {self.board.next_player()}'s turn.")

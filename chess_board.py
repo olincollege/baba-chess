@@ -15,7 +15,7 @@ class ChessBoard:
 
     player_1_color = "white"
     player_2_color = "black"
-    blank_square = "  "
+    blank_square = " "
 
     def __init__(self):
         """
@@ -34,49 +34,54 @@ class ChessBoard:
         self._board[6] = ["p" + str(_) for _ in range(8)] # Black pawns
         self._board[7] = ["r1", "n1", "b1", "q1", "k1", "b2", "n2", "r2"] # Black back row
         
-        self._generate_piece_instances()
+        #self._generate_piece_instances()
 
-    def _generate_piece_instances(self):
-        """
-        Docstring
-        """
-        #globals()[self._board[1][0]] = Pawn(self._board, (1, 0), True)
+    # def _generate_piece_instances(self):
+    #     """
+    #     Docstring
+    #     """
+    #     #self.test = Pawn(self._board, (1, 0), True)
+    #     # test = None
+    #     # self._board[0][0] = test
+    #     # print(self._board[0][0])
+    #     # print(self._board)
+        
+    #     #globals()[self._boar[0][0]] = Pawn(self._board, (1, 0), True)
 
-        self.test = Pawn(self._board, (1, 0), True)
-        #print(self.test)
-        # pieces = []
-        # for row_count, row in enumerate(self._board):
-        #     if row[0].isupper():
-        #         color = True
-        #     else: 
-        #         color = False
-        #     for column_count, column in enumerate(row):
-        #         pieces.append(column)
-        #         if column[0] in ["P", "p"]:
-        #             #print(color)
-        #             globals()[column] = Pawn(self._board, (row_count, column_count), color)
-        #             #print(column)
-        #             #locals()[column] = Pawn(self._board, (row_count, column_count), color)
-        #             # print("pawn found!")
-        # #print(self._board[1][0])
+    #     #globals()[self._board[1][0]] = Pawn(self._board, (1, 0), True)
+
+    #     #print(self.test)
+    #     pieces = []
+    #     for row_count, row in enumerate(self._board):
+    #         if row[0].isupper():
+    #             color = True
+    #         else: 
+    #             color = False
+    #         for column_count, column in enumerate(row):
+    #             pieces.append(column)
+    #             if column[0] in ["P", "p"]:
+    #                 globals()[column] = Pawn(self._board, (row_count, column_count), color)
+    #                 #print(column)
+    #                 #locals()[column] = Pawn(self._board, (row_count, column_count), color)
+    #                 # print("pawn found!")
+    #     #print(self._board[1][0])
 
     def get_square_properties(self, row, column):
         pass
 
     def __repr__(self):
-        # row_divider = "+--" * 8 + "+"
-        # lines = [row_divider]
-        # for i in range(8):
-        #     row = f"|{'|'.join(self._board[i])}|"
-        #     #row = str(print(self._board[i][0]))
-        #     lines.append(row)
-        #     lines.append(row_divider)
-
-        # return "\n".join(lines)
+        row_divider = "+-" * 8 + "+"
+        lines = [row_divider]
+        for i in range(8):
+            pieces_row = [self._board[i][_][0] for _ in range(8)]
+            row = f"|{'|'.join(pieces_row)}|"
+            lines.append(row)
+            lines.append(row_divider)
+        return "\n".join(lines)
 
         #test1 = str(print(self.test))
         #print(test1)
-        return self.test.__repr__()
+        #return self._board[1][0].__repr__()
         """
         
         """
