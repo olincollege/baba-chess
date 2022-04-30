@@ -35,5 +35,13 @@ def main():
         view.draw()
     print(f"{current_player} has ended the game.")
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
+
+def drews_test():
+    board = ChessBoard()
+    board.fill_generic_board()
+    print(board)
+
+
+drews_test()
