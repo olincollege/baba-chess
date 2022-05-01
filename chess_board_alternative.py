@@ -2,13 +2,13 @@
 Chess Board Implementation.
 """
 
-from shutil import move
-from tokenize import blank_re
+#from shutil import move
+#from tokenize import blank_re
 
-from numpy import moveaxis
-from pyparsing import White
-from sqlalchemy import BLANK_SCHEMA
-# from chess_pieces import Pawn, Rook, Bishop, Knight, Queen, King
+#from numpy import moveaxis
+#from pyparsing import White
+#from sqlalchemy import BLANK_SCHEMA
+#from chess_pieces import Pawn, Rook, Bishop, Knight, Queen, King
 
 class ChessBoard:
     """
@@ -25,6 +25,8 @@ class ChessBoard:
         """
         self._board = [[self.blank_square for _ in range(8)] for _ in range(8)]
         self._next_player = self.player_1_color
+        self._moves_made = []
+        self._pieces_captured = []
         self.fill_generic_board()
 
     def fill_generic_board(self):
@@ -92,9 +94,13 @@ class ChessBoard:
         #! abstract method in the controller class.
         game_piece = self.get_square(start_pos)
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
+        #if a piece is captured, add it to the pieces_captur
+        if self._board[end_pos[0]][end_pos[1]] != self.blank_square:
+            self._pieces_captured.append(self._board[end_pos[0]][end_pos[1]])
         self._board[end_pos[0]][end_pos[1]] = game_piece
 
         # Flips the next player to move.
+        self._moves_made.append((start_pos, end_pos))
         self._flip_next_move()
 
     def undo_move(self, start_pos, end_pos):
@@ -105,7 +111,7 @@ class ChessBoard:
             start_pos: A tuple representing the location of the piece before the move.
             end_pos: A tuple representing the current location of the piece.
         """
-        self.move_piece(end_pos, start_pos)
+        self.move_piece(self._moves_made[-1][1], self._moves_made[-1][0])
 
     def __repr__(self):
         """
