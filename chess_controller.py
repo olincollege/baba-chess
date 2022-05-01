@@ -16,14 +16,14 @@ class ChessController(ABC):
         attribute.
         """
         self._board = board
-    
+
     @property
     def board(self):
         """
         Returns the Chess board stores in the Chess board instance.
         """
         return self._board
-    
+
     @abstractmethod
     def move(self):
         """
@@ -43,15 +43,16 @@ class TextController(ChessController):
         board. The player input has to be both the start position and end
         position of the moves.
         """
+        coordinates = []
         try:
             input_number = input("Choose the piece you'd like to move and your "
                                 "end location(row_start column_start, row_end "
                                 "column_end):")
-
+            # If the move inputted by the player is "quit", the game is over.
+            if input_number == "quit" or input_number == "undo":
+                return input_number
             input_number_list = [i for i in input_number.split(", ")]
-            #print(input_number_list) #TODO I'm not sure what this is for,
-            # commented out for now - Drew
-            coordinates = []
+
             for coords in input_number_list:
                 coordinates += [int(i) for i in coords.split()]
 
@@ -61,16 +62,12 @@ class TextController(ChessController):
 
             if coordinates[0] < 0 or \
                     coordinates[1] < 0 or \
+                    coordinates[2] < 0 or \
                     coordinates[3] < 0 or \
-                    coordinates[4] < 0 or \
                     input_number == "":
                 raise IndexError
 
-            #! This mark function does not exist yet for the Chess Model (MVC)
-            #! When it is implemented, change this and make sure it still works
-            #? The mark function will probably take in the tuples as an
-            #? input. Make sure of this though.
-            #* self._board.mark(input_number_list[0], input_number_list[1])
+            self._board.move_piece(coordinate_tuples[0], coordinate_tuples[1])
         except (ValueError, IndexError):
             print(f"Error: '{input_number}' is not a valid move")
             self.move()

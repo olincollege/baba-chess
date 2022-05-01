@@ -31,24 +31,32 @@ class ChessBoard:
         """
         Fill board with variables and create piece instances.
         """
-        self._board[0] = ["R1", "N1", "B1", "Q1", "K1", "B2", "N2", "R2"] # White back row
-        self._board[1] = ["P" + str(_) for _ in range (8)] # White pawns
+        self._board[7] = ["R", "N", "B", "Q", "K", "B", "N", "R"] # White back row
+        self._board[6] = ["P" + str(_) for _ in range (8)] # White pawns
         
-        self._board[6] = ["p" + str(_) for _ in range(8)] # Black pawns
-        self._board[7] = ["r1", "n1", "b1", "q1", "k1", "b2", "n2", "r2"] # Black back row
+        self._board[1] = ["p" + str(_) for _ in range(8)] # Black pawns
+        self._board[0] = ["r", "n", "b", "q", "k", "b", "n", "r"] # Black back row
 
     def next_player(self):
         """
-        Return a bool for the next color player to move.
+        Return the color of the next player to move.
 
         Returns:
-            A bool representing 
+            A string representing the next player's color (white or black).
         """
         #TODO decide between representing the next player as a bool or a string.
-        if self._next_player == self.player_1_color:
-            return True
-        return False
+        #* Chose to represent next player as a string
+        return self._next_player
     
+    def _flip_next_move(self):
+        """
+        Change the next player to move.
+        """
+        if self._next_player == self.player_1_color:
+            self._next_player = self.player_2_color
+        else:
+            self._next_player = self.player_1_color
+
     def get_square(self, pos):
         """
         Return the piece at the given square of the board.
@@ -72,7 +80,7 @@ class ChessBoard:
         #TODO Will be used for legal move checker, to be implemented later
         pass
 
-    def move(self, start_pos, end_pos):
+    def move_piece(self, start_pos, end_pos):
         """
         Move a specified piece to a new location.
 
@@ -80,9 +88,14 @@ class ChessBoard:
             start_pos: A tuple representing the location of the piece to move.
             end_pos: A tuple representing the location to the move the piece to.
         """
+        #! Changed `move` from `move` to `move_piece` because move is an
+        #! abstract method in the controller class.
         game_piece = self.get_square(start_pos)
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
         self._board[end_pos[0]][end_pos[1]] = game_piece
+
+        # Flips the next player to move.
+        self._flip_next_move()
 
     def undo_move(self, start_pos, end_pos):
         """
@@ -92,7 +105,7 @@ class ChessBoard:
             start_pos: A tuple representing the location of the piece before the move.
             end_pos: A tuple representing the current location of the piece.
         """
-        move(end_pos, start_pos)
+        self.move_piece(end_pos, start_pos)
 
     def __repr__(self):
         """

@@ -2,7 +2,6 @@
 Main program to set up and run a game of chess.
 """
 from chess_board_alternative import ChessBoard
-from chess_pieces import Pawn, Rook, Bishop, Knight, Queen, King
 from chess_view import TextView
 from chess_controller import TextController
 
@@ -25,18 +24,18 @@ def main():
     #TODO find a win condition so this isn't an infinite loop
     while True:
         #TODO make a bidirectional dictionary to condense code
-        if board.next_player():
-            current_player = controllers["white"]
-            current_player_color = "white"
+        current_player = controllers[(board.next_player())]
+
+        view.draw()
+        move = current_player.move()
+        # If the move inputted by the player is "quit", the game is over.
+        if move == "quit":
+            break
+        elif move == "undo":
+            board.undo_move()
         else:
-            current_player = controllers["black"]
-            current_player_color = "black"
-        # if controllers[current_player].quit():
-        #    break
-        view.draw()
-        controllers[current_player_color].move()
-        view.draw()
-    print(f"{current_player} has ended the game.")
+            move
+    print(f"{board.next_player()} has ended the game.")
 
 if __name__ == "__main__":
    main()
