@@ -103,7 +103,7 @@ class ChessBoard:
         self._moves_made.append((start_pos, end_pos))
         self._flip_next_move()
 
-    def undo_move(self, start_pos, end_pos):
+    def undo_move(self):
         """
         Given the start and end piece position, undo the previous move.
 

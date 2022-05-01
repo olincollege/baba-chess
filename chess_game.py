@@ -20,6 +20,19 @@ def main():
         "black": TextController(board),
     }
     current_player = None
+    #Print out a set of rules and allowed inputs
+    print("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"\
+          "Hello and Welcome to Baba-Chess 1.0, a simple text-based Python\n"\
+          "implementation of a chess board. In order to make a\n"\
+          "move on the board, please enter your moves in Long Algebraic\n"\
+          "Notation (ie. e2, e4). When prompted to move, there are three valid"\
+          " movetypes.\nMake a move - e2, e4\nQuit - quit\n"\
+          "Undo move - undo\nThe current revision of this chess board relies "\
+          "heavily on your knowledge of chess.\nNotably, enpassant captures, "\
+          "castling, and promotions have not been implemented into this "\
+          "version;\nhowever, progress is being made towards improving this "\
+          "chess board.\n"\
+          "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
     
     #TODO find a win condition so this isn't an infinite loop
     while True:
@@ -38,7 +51,7 @@ def main():
     print(f"{board.next_player()} has ended the game.")
 
 if __name__ == "__main__":
-   main()
+    main()
 
 # def board_move_test():
 #     #set up MVC components for an instance of chess
