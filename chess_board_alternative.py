@@ -94,12 +94,12 @@ class ChessBoard:
         #! abstract method in the controller class.
         game_piece = self.get_square(start_pos)
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
-        #if a piece is captured, add it to the pieces_captur
+        #if a piece is captured, add it to the pieces_captured list.
         if self._board[end_pos[0]][end_pos[1]] != self.blank_square:
             self._pieces_captured.append(self._board[end_pos[0]][end_pos[1]])
         self._board[end_pos[0]][end_pos[1]] = game_piece
 
-        # Flips the next player to move.
+        # Adds move to moves_made list and flips the next player to move.
         self._moves_made.append((start_pos, end_pos))
         self._flip_next_move()
 
