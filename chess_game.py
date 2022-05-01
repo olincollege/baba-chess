@@ -40,3 +40,27 @@ def main():
 
 if __name__ == "__main__":
    main()
+
+# def board_move_test():
+#     #set up MVC components for an instance of chess
+#     board = ChessBoard()
+#     view = TextView(board)
+#     controllers = {
+#         "white": TextController(board),
+#         "black": TextController(board),
+#     }
+#     current_player = None
+
+#     if board.next_player():
+#         current_player = controllers["white"]
+#         current_player_color = "white"
+#     else:
+#         current_player = controllers["black"]
+#         current_player_color = "black"
+#     view.draw()
+#     board.move((1, 0), (2, 0))
+#     view.draw()
+#     board.move((6, 6), (5, 6))
+#     view.draw()
+
+# board_move_test()
