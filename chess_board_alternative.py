@@ -117,13 +117,15 @@ class ChessBoard:
         """
         Return a string representing the contents of the board.
         """
-        row_divider = "+-" * 8 + "+"
-        lines = [row_divider]
+        files = "   a b c d e f g h" 
+        row_divider = "  " + ("+-" * 8) + "+"
+        lines = [files, row_divider]
         for i in range(8):
             pieces_row = [self._board[i][_][0] for _ in range(8)]
-            row = f"|{'|'.join(pieces_row)}|"
+            row = f"{i+1} |{'|'.join(pieces_row)}| {i+1}"
             lines.append(row)
             lines.append(row_divider)
+        lines.append(files)
         return "\n".join(lines)
         
 """
