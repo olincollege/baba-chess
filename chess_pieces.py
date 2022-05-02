@@ -40,7 +40,7 @@ class ChessPiece(ABC):
             A bool representing whether the square is valid or not.
         """
         try: 
-            self._board.get_square(pos)
+            self._board.get_piece(pos)
             return True
         except (IndexError):
             return False
@@ -91,32 +91,32 @@ class Pawn(ChessPiece):
         if self.is_white():
             if self.first_move: #if first move, check the second square ahead
                 (row, col) = (row+2, col)
-                if self._board.get_square((row, col)) == " ":
+                if self._board.get_piece((row, col)) == " ":
                     moves.append((row, col))
             for i in range(-1,2):
                 (row, col) = (row+1, col+i)
                 if i == 0:
-                    if self._board.get_square((row, col)) == " ":
+                    if self._board.get_piece((row, col)) == " ":
                         moves.append((row, col))
                 else:
                     if self.in_bound((row, col)):
-                        if self._board.get_square((row, col)) != " " \
-                        or self._board.get_square((row, col)) != self.is_white():
+                        if self._board.get_piece((row, col)) != " " \
+                        or self._board.get_piece((row, col)) != self.is_white():
                             moves.append((row, col))
         else:
             if self.first_move:
                 (row, col) = (row-2, col)
-                if self._board.get_square((row, col)) == " ":
+                if self._board.get_piece((row, col)) == " ":
                     moves.append((row, col))
             for i in range(-1,2):
                 (row, col) = (row-1, col+i)
                 if i == 0:
-                    if self._board.get_square((row, col)) == " ":
+                    if self._board.get_piece((row, col)) == " ":
                         moves.append((row, col))
                 else:
                     if self.in_bound((row, col)):
-                        if self._board.get_square((row, col)) != " " \
-                        or self._board.get_square((row, col)) != self.is_white():
+                        if self._board.get_piece((row, col)) != " " \
+                        or self._board.get_piece((row, col)) != self.is_white():
                             moves.append((row, col))
         return moves
 
@@ -151,8 +151,8 @@ class Rook(ChessPiece):
             for i in range(7):
                 (row, col) = (row + i*direction[0], col +i*direction[1])
                 if self.in_bound((row, col)):
-                    if self._board.get_square((row, col)) == " " \
-                    or self._board.get_square((row, col)) != self.is_white():
+                    if self._board.get_piece((row, col)) == " " \
+                    or self._board.get_piece((row, col)) != self.is_white():
                         moves.append((row, col))
                 else:
                     break
@@ -189,8 +189,8 @@ class Bishop(ChessPiece):
             for i in range(7):
                 (row, col) = (row + i*direction[0], col +i*direction[1])
                 if self.in_bound((row, col)):
-                    if self._board.get_square((row, col)) == " " \
-                    or self._board.get_square((row, col)) != self.is_white():
+                    if self._board.get_piece((row, col)) == " " \
+                    or self._board.get_piece((row, col)) != self.is_white():
                         moves.append((row, col))
                 else:
                     break
@@ -226,8 +226,8 @@ class Knight(ChessPiece):
         for direction in in_L:
             (row, col) = (row + direction[0], col +direction[1])
             if self.in_bound((row, col)):
-                if self._board.get_square((row, col)) == " " \
-                or self._board.get_square((row, col)) != self.is_white():
+                if self._board.get_piece((row, col)) == " " \
+                or self._board.get_piece((row, col)) != self.is_white():
                     moves.append((row, col))
             else:
                 break
@@ -266,8 +266,8 @@ class Queen(ChessPiece):
             for i in range(7):
                 (row, col) = (row + i*direction[0], col +i*direction[1])
                 if self.in_bound((row, col)):
-                    if self._board.get_square((row, col)) == " " \
-                    or self._board.get_square((row, col)) != self.is_white():
+                    if self._board.get_piece((row, col)) == " " \
+                    or self._board.get_piece((row, col)) != self.is_white():
                         moves.append((row, col))
                 else:
                     break
@@ -305,8 +305,8 @@ class King(ChessPiece):
         for direction in full:
             (row, col) = (row + direction[0], col + direction[1])
             if self.in_bound((row, col)):
-                if self._board.get_square((row, col)) == " " \
-                or self._board.get_square((row, col)) != self.is_white():
+                if self._board.get_piece((row, col)) == " " \
+                or self._board.get_piece((row, col)) != self.is_white():
                     moves.append((row, col))
             else:
                 break

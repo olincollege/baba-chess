@@ -62,5 +62,6 @@ if __name__ == "__main__":
 #     }
 #     current_player = controllers[(board.next_player())]
 #     print(board.is_occupied((5, 0)))
+#     print(board.piece_color(board.get_piece((7,7))))
 
 # board_move_test()

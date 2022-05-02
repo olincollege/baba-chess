@@ -1,15 +1,6 @@
 """
 Chess Board Implementation.
 """
-
-#from shutil import move
-#from tokenize import blank_re
-
-#from numpy import moveaxis
-#from pyparsing import White
-#from sqlalchemy import BLANK_SCHEMA
-#from chess_pieces import Pawn, Rook, Bishop, Knight, Queen, King
-
 class ChessBoard:
     """
     Your docstring goes here.
@@ -59,8 +50,9 @@ class ChessBoard:
         else:
             self._next_player = self.player_1_color
 
-    def get_square(self, pos):
+    def get_piece(self, pos):
         """
+        #TODO update this docstring
         Return the piece at the given square of the board.
 
         The first character returned represents the piece type, while the second
@@ -69,7 +61,8 @@ class ChessBoard:
         black. "B2" describes the second white bishop.
 
         Args:
-            pos:
+            pos: A tuple representing the position of a given square. The first
+            number is the row, the second is the column.
         
         Returns:
             A string representing the piece at a given square. An empty string
@@ -81,8 +74,9 @@ class ChessBoard:
         """
         Returns a bool for if a square is occupied.
 
-        Args
-            pos:
+        Args:
+            pos: A tuple representing the position of a given square. The first
+            number is the row, the second is the column.
 
         Returns:
             True if a square is occupied and false if it is not.
@@ -91,8 +85,22 @@ class ChessBoard:
             return True
         return False
 
-    def piece_color(self):
-        pass
+    def piece_color(self, piece):
+        """
+        Returns a the color of a piece in a given square.
+
+        Args:
+            Piece: A string representing a chess piece. Capitalization
+                determines the color of a piece, so"B" would represent a white
+                bishop while "b" would represent a black bishop. 
+        
+        Returns:
+            A string representing the color of a given piece. "white" if the
+            piece is white, "black" if the piece is black. 
+        """
+        if piece.isupper():
+            return "white"
+        return "black"
 
     def move_piece(self, start_pos, end_pos):
         """
@@ -102,7 +110,7 @@ class ChessBoard:
             start_pos: A tuple representing the location of the piece to move.
             end_pos: A tuple representing the location to the move the piece to.
         """
-        game_piece = self.get_square(start_pos)
+        game_piece = self.get_piece(start_pos)
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
         #if a piece is captured, add it to the pieces_captured list.
         if self._board[end_pos[0]][end_pos[1]] != self.blank_square:
@@ -163,7 +171,7 @@ class ChessBoard:
 #             A bool representing whether the square is valid or not.
 #         """
 #         try: 
-#             self._board.get_square(pos)
+#             self._board.get_piece(pos)
 #             return True
 #         except (IndexError):
 #             return False
@@ -188,31 +196,31 @@ class ChessBoard:
 #         if self.is_white():
 #             if self.first_move: #if first move, check the second square ahead
 #                 (row, col) = (row+2, col)
-#                 if self._board.get_square((row, col)) == " ":
+#                 if self._board.get_piece((row, col)) == " ":
 #                     moves.append((row, col))
 #             for i in range(-1,2):
 #                 (row, col) = (row+1, col+i)
 #                 if i == 0:
-#                     if self._board.get_square((row, col)) == " ":
+#                     if self._board.get_piece((row, col)) == " ":
 #                         moves.append((row, col))
 #                 else:
 #                     if self.in_bound((row, col)):
-#                         if self._board.get_square((row, col)) != " " \
-#                         or self._board.get_square((row, col)) != self.is_white():
+#                         if self._board.get_piece((row, col)) != " " \
+#                         or self._board.get_piece((row, col)) != self.is_white():
 #                             moves.append((row, col))
 #         else:
 #             if self.first_move:
 #                 (row, col) = (row-2, col)
-#                 if self._board.get_square((row, col)) == " ":
+#                 if self._board.get_piece((row, col)) == " ":
 #                     moves.append((row, col))
 #             for i in range(-1,2):
 #                 (row, col) = (row-1, col+i)
 #                 if i == 0:
-#                     if self._board.get_square((row, col)) == " ":
+#                     if self._board.get_piece((row, col)) == " ":
 #                         moves.append((row, col))
 #                 else:
 #                     if self.in_bound((row, col)):
-#                         if self._board.get_square((row, col)) != " " \
-#                         or self._board.get_square((row, col)) != self.is_white():
+#                         if self._board.get_piece((row, col)) != " " \
+#                         or self._board.get_piece((row, col)) != self.is_white():
 #                             moves.append((row, col))
 #         return moves
