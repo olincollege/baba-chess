@@ -69,17 +69,29 @@ class ChessBoard:
         black. "B2" describes the second white bishop.
 
         Args:
-            row: An int representing the index of the row of the board to get.
-            col: An int representing the index of the column of the board to
-                get.
+            pos:
         
         Returns:
-            A string representing the piece at a given square. 
+            A string representing the piece at a given square. An empty string
+            is returned if a piece is empty.
         """
         return self._board[pos[0]][pos[1]]
 
-    def get_square_properties(self, row, column):
-        #TODO Will be used for legal move checker, to be implemented later
+    def is_occupied(self, pos):
+        """
+        Returns a bool for if a square is occupied.
+
+        Args
+            pos:
+
+        Returns:
+            True if a square is occupied and false if it is not.
+        """
+        if self._board[pos[0]][pos[1]] != " ":
+            return True
+        return False
+
+    def piece_color(self):
         pass
 
     def move_piece(self, start_pos, end_pos):
@@ -90,8 +102,6 @@ class ChessBoard:
             start_pos: A tuple representing the location of the piece to move.
             end_pos: A tuple representing the location to the move the piece to.
         """
-        #! Changed `move` from `move` to `move_piece` because move is an
-        #! abstract method in the controller class.
         game_piece = self.get_square(start_pos)
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
         #if a piece is captured, add it to the pieces_captured list.
