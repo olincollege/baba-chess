@@ -1,6 +1,10 @@
 """
 Chess Board Implementation.
 """
+from multiprocessing.sharedctypes import Value
+from optparse import Values
+
+
 class ChessBoard:
     """
     Your docstring goes here.
@@ -18,6 +22,7 @@ class ChessBoard:
         self._next_player = self.player_1_color
         self._moves_made = []
         self._pieces_captured = []
+        self._error_message = None
         self.fill_generic_board()
 
     def fill_generic_board(self):
@@ -40,6 +45,18 @@ class ChessBoard:
         #TODO decide between representing the next player as a bool or a string.
         #* Chose to represent next player as a string
         return self._next_player
+
+    def _error_message(self):
+        """
+        Return the current error message of the chess board.
+
+        #TODO: Add a more descriptive docstring after legal move checker had
+        # been fully implemented.
+
+        Returns:
+            A string representing the current error for the chess board.
+        """
+        return self._error_message
     
     def _flip_next_move(self):
         """
@@ -111,6 +128,13 @@ class ChessBoard:
             end_pos: A tuple representing the location to the move the piece to.
         """
         game_piece = self.get_piece(start_pos)
+
+        # Check if move will capture your own piece.
+        if self.piece_color(self.get_piece(end_pos)) == self.piece_color(game_piece):
+            print("You cannot capture your own piece!")
+            raise ValueError
+        
+        # Move piece and replace previous square with a blank square.
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
         #if a piece is captured, add it to the pieces_captured list.
         if self._board[end_pos[0]][end_pos[1]] != self.blank_square:
