@@ -1,7 +1,7 @@
 """
 Main program to set up and run a game of chess.
 """
-from chess_board_alternative import ChessBoard
+from chess_board import ChessBoard
 from chess_view import TextView
 from chess_controller import TextController
 
