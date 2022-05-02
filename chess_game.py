@@ -1,7 +1,7 @@
 """
 Main program to set up and run a game of chess.
 """
-from chess_board_alternative import ChessBoard
+from chess_board import ChessBoard
 from chess_view import TextView
 from chess_controller import TextController
 
@@ -36,7 +36,6 @@ def main():
     
     #TODO find a win condition so this isn't an infinite loop
     while True:
-        #TODO make a bidirectional dictionary to condense code
         current_player = controllers[(board.next_player())]
 
         view.draw()
@@ -61,18 +60,8 @@ if __name__ == "__main__":
 #         "white": TextController(board),
 #         "black": TextController(board),
 #     }
-#     current_player = None
-
-#     if board.next_player():
-#         current_player = controllers["white"]
-#         current_player_color = "white"
-#     else:
-#         current_player = controllers["black"]
-#         current_player_color = "black"
-#     view.draw()
-#     board.move((1, 0), (2, 0))
-#     view.draw()
-#     board.move((6, 6), (5, 6))
-#     view.draw()
+#     current_player = controllers[(board.next_player())]
+#     print(board.is_occupied((5, 0)))
+#     print(board.piece_color(board.get_piece((7,7))))
 
 # board_move_test()
