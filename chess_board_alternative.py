@@ -122,7 +122,7 @@ class ChessBoard:
         lines = [files, row_divider]
         for i in range(8):
             pieces_row = [self._board[i][_][0] for _ in range(8)]
-            row = f"{i+1} |{'|'.join(pieces_row)}| {i+1}"
+            row = f"{8-i} |{'|'.join(pieces_row)}| {8-i}"
             lines.append(row)
             lines.append(row_divider)
         lines.append(files)
