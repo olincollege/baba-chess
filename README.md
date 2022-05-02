@@ -4,11 +4,9 @@ Omar Salih, Arturo Joya, Drew Pang
 This repository contains the necessary files needed to run a game of Chess in Python.
 
 ## Python Dependencies
-This chess board implementation was wr
+This chess board implementation was written in a Conda environment using Python 3.9.7.
 
 ## Use the Code
-Feel free to in a Conda environment using Python 3.9.7.
-
 To begin using this code, copy this repository onto a directory of your choice. You will want to make sure that you have `chess_board_alternative`, `chess_view`, `chess_controller`, and `chess_game`.
 - Open a new terminal, make sure that you are in the same directory as the code.
 - Run `python chess_game.py main` on the terminal.
