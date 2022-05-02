@@ -3,7 +3,6 @@ Chess Game Controller.
 """
 from abc import ABC, abstractmethod
 
-
 class ChessController(ABC):
     """
     The Chess abstracted class representing the controllers for the Chess game.
@@ -36,7 +35,7 @@ class TextController(ChessController):
     The Chess controller that takes in player input and feeds it to the Chess
     game. Takes place of the abstracted move class.
     """
-
+     
     def move(self):
         """
         Takes in a player input based on the spaces avaliable on the Chess
@@ -51,23 +50,31 @@ class TextController(ChessController):
             # If the move inputted by the player is "quit", the game is over.
             if input_number == "quit" or input_number == "undo":
                 return input_number
-            input_number_list = [i for i in input_number.split(", ")]
-
-            for coords in input_number_list:
-                coordinates += [int(i) for i in coords.split()]
-
-            # Start Location, End Location
-            coordinate_tuples = [(coordinates[0], coordinates[1]), \
-                                (coordinates[2], coordinates[3])]
-
-            if coordinates[0] < 0 or \
-                    coordinates[1] < 0 or \
-                    coordinates[2] < 0 or \
-                    coordinates[3] < 0 or \
-                    input_number == "":
-                raise IndexError
-
+            coordinate_tuples = self.lan_to_coords((input_number))
             self._board.move_piece(coordinate_tuples[0], coordinate_tuples[1])
-        except (ValueError, IndexError):
+        except (ValueError, KeyError):
             print(f"Error: '{input_number}' is not a valid move")
             self.move()
+
+    def lan_to_coords(self, lan_input):
+        """
+        
+        """
+        #generate the translation dictionaries
+        files = "abcdefgh"
+        translate_files = {}
+        translate_ranks = {}
+        for i in range(8):
+            translate_files[files[i]] = i
+            translate_ranks[8-i] = i
+        #parse inputs to translate
+        lan_inputs = [i for i in lan_input.split(", ")]
+        #assign start and end positions from inputs
+        lan_start = lan_inputs[0]
+        lan_end = lan_inputs[1]
+        return ((translate_ranks[int(lan_start[1])],\
+                 translate_files[lan_start[0]]),\
+                (translate_ranks[int(lan_end[1])],\
+                 translate_files[lan_end[0]]))
+        
+        
