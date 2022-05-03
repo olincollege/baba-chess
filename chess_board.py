@@ -1,9 +1,6 @@
 """
 Chess Board Implementation.
 """
-from multiprocessing.sharedctypes import Value
-from optparse import Values
-
 
 class ChessBoard:
     """
@@ -30,9 +27,9 @@ class ChessBoard:
         Fill board with variables and create piece instances.
         """
         self._board[7] = ["R", "N", "B", "Q", "K", "B", "N", "R"] # White back row
-        self._board[6] = ["P" + str(_) for _ in range (8)] # White pawns
+        self._board[6] = ["P" for _ in range (8)] # White pawns
         
-        self._board[1] = ["p" + str(_) for _ in range(8)] # Black pawns
+        self._board[1] = ["p" for _ in range(8)] # Black pawns
         self._board[0] = ["r", "n", "b", "q", "k", "b", "n", "r"] # Black back row
 
     def next_player(self):
