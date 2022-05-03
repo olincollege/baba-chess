@@ -115,6 +115,8 @@ class ChessBoard:
             A string representing the color of a given piece. "white" if the
             piece is white, "black" if the piece is black. 
         """
+        if piece == " ":
+            return "blank"
         if piece.isupper():
             return "white"
         return "black"
