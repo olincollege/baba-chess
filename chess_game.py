@@ -8,7 +8,7 @@ from chess_controller import TextController
 def main():
     """
     Main function to run a chess game.
-    
+
     The current main function runs infinitely until a player choses to quit the
     game.
     """
@@ -33,20 +33,20 @@ def main():
           "version;\nhowever, progress is being made towards improving this "\
           "chess board.\n"\
           "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
-    
+
     #TODO find a win condition so this isn't an infinite loop
     while True:
         current_player = controllers[(board.next_player())]
-
         view.draw()
         move = current_player.move()
+        if move == "Invalid Move":
+            move = current_player.move()
         # If the move inputted by the player is "quit", the game is over.
         if move == "quit":
             break
         elif move == "undo":
             board.undo_move()
-        else:
-            move
+
     print(f"{board.next_player()} has ended the game.")
 
 if __name__ == "__main__":

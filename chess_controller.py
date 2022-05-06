@@ -35,14 +35,14 @@ class TextController(ChessController):
     The Chess controller that takes in player input and feeds it to the Chess
     game. Takes place of the abstracted move class.
     """
-     
+
     def move(self):
         """
         Takes in a player input based on the spaces avaliable on the Chess
         board. The player input has to be both the start position and end
         position of the moves.
         """
-        coordinates = []
+
         try:
             input_number = input("Choose the piece you'd like to move and your "
                                 "end location(row_start column_start, row_end "
@@ -52,29 +52,54 @@ class TextController(ChessController):
                 return input_number
             coordinate_tuples = self.lan_to_coords((input_number))
             self._board.move_piece(coordinate_tuples[0], coordinate_tuples[1])
-        except (ValueError, KeyError):
-            print(f"Error: '{input_number}' is not a valid move")
-            self.move()
+        except (ValueError, KeyError, IndexError):
+            print(f"Error: '{input_number}' is not a valid move. "
+                    "Input a new move.")
+            return "Invalid Move"
+            # self.move()
 
     def lan_to_coords(self, lan_input):
         """
+        Takes the player's algebraic notation input and translates it to tuple
+        form for the ChessBoard class to use.
+
+        Args:
+            lan_input: A string representing a chess long-algebraic-notation
+                player input.
         
+        Returns:
+            Returns a tuple of tuples representing the coordinates for the start
+            and end coordinates for the ChessBoard class to implement. 
         """
-        #generate the translation dictionaries
-        files = "abcdefgh"
-        translate_files = {}
-        translate_ranks = {}
-        for i in range(8):
-            translate_files[files[i]] = i
-            translate_ranks[8-i] = i
-        #parse inputs to translate
+        # first dict is files, second is ranks
+        translation_dicts = self._translate_coords()
+        translate_ranks = translation_dicts[1]
+        translate_files = translation_dicts[0]
+        # Parse inputs to translate
         lan_inputs = [i for i in lan_input.split(", ")]
-        #assign start and end positions from inputs
+        # Assign start and end positions from inputs
         lan_start = lan_inputs[0]
         lan_end = lan_inputs[1]
         return ((translate_ranks[int(lan_start[1])],\
                  translate_files[lan_start[0]]),\
                 (translate_ranks[int(lan_end[1])],\
                  translate_files[lan_end[0]]))
-        
-        
+
+    def _translate_coords(self):
+        """
+        Initializes the dictionaries to be used in order to translate the
+        player input from long algebraic notation (LAN) to tuple form.
+
+        Returns:
+        Returns a list of dictionaries representing the translation dictionaries
+            to be used as a helper for the lan_to_coords method.
+        """
+        # Generate the translation dictionaries
+        files = "abcdefgh"
+        translate_files = {}
+        translate_ranks = {}
+        for i in range(8):
+            translate_files[files[i]] = i
+            translate_ranks[8-i] = i
+
+        return [translate_files,translate_ranks]
