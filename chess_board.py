@@ -22,7 +22,7 @@ class ChessBoard:
         self._next_player = self.player_1_color
         self._moves_made = []
         self._pieces_captured = []
-        self._error_message = None
+        # self._error_message = None
         self.fill_generic_board()
 
     def fill_generic_board(self):
@@ -46,17 +46,17 @@ class ChessBoard:
         #* Chose to represent next player as a string
         return self._next_player
 
-    def _error_message(self):
-        """
-        Return the current error message of the chess board.
+    # def _error_message(self):
+    #     """
+    #     Return the current error message of the chess board.
 
-        #TODO: Add a more descriptive docstring after legal move checker had
-        # been fully implemented.
+    #     #TODO: Add a more descriptive docstring after legal move checker had
+    #     # been fully implemented.
 
-        Returns:
-            A string representing the current error for the chess board.
-        """
-        return self._error_message
+    #     Returns:
+    #         A string representing the current error for the chess board.
+    #     """
+    #     return self._error_message
     
     def _flip_next_move(self):
         """
@@ -121,6 +121,40 @@ class ChessBoard:
             return "white"
         return "black"
 
+    def check_legal_move(self, start_pos, end_pos):
+        piece = self.get_piece(start_pos)
+
+        if piece in ["P", "p"]:
+            self.check_pawn_move(start_pos, end_pos)
+        if piece in ["R", "r"]:
+            self.check_rook_move(start_pos, end_pos)
+        if piece in ["N", "n"]:
+            self.check_knight_move(start_pos, end_pos)
+        if piece in ["B", "b"]:
+            self.check_bishop_move(start_pos, end_pos)
+        if piece in ["Q", "q"]:
+            self.check_queen_move(start_pos, end_pos)
+        if piece in ["K", "k"]:
+            self.check_king_move(start_pos, end_pos)
+
+    def check_pawn_move(self, start_pos, end_pos):
+        pass
+
+    def check_rook_move(self, start_pos, end_pos):
+        pass
+
+    def check_knight_move(self, start_pos, end_pos):
+        pass
+
+    def check_bishop_move(self, start_pos, end_pos):
+        pass
+
+    def check_queen_move(self, start_pos, end_pos):
+        pass
+
+    def check_king_move(self, start_pos, end_pos):
+        pass
+
     def move_piece(self, start_pos, end_pos):
         """
         Move a specified piece to a new location.
@@ -129,12 +163,19 @@ class ChessBoard:
             start_pos: A tuple representing the location of the piece to move.
             end_pos: A tuple representing the location to the move the piece to.
         """
-        game_piece = self.get_piece(start_pos)
+        piece = self.get_piece(start_pos)
+
+        # Check if piece is an opponent's piece or a blank square.
+        if self.piece_color(piece) != self._next_player:
+            print("Not your own piece!")
+            raise ValueError
 
         # Check if move will capture your own piece.
-        if self.piece_color(self.get_piece(end_pos)) == self.piece_color(game_piece):
+        if self.piece_color(self.get_piece(end_pos)) == self.piece_color(piece):
             print("You cannot capture your own piece!")
             raise ValueError
+
+
         
         # Move piece and replace previous square with a blank square.
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
