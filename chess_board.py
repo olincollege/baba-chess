@@ -136,8 +136,8 @@ class ChessBoard:
         # Move piece and replace previous square with a blank square.
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
         #if a piece is captured, add it to the pieces_captured list.
-        if self._board[end_pos[0]][end_pos[1]] != self.blank_square:
-            self._pieces_captured.append(self._board[end_pos[0]][end_pos[1]])
+        #for the sake of the undo functionality, blanks are also "captured".
+        self._pieces_captured.append(self._board[end_pos[0]][end_pos[1]])
         self._board[end_pos[0]][end_pos[1]] = game_piece
 
         # Adds move to moves_made list and flips the next player to move.
@@ -153,6 +153,9 @@ class ChessBoard:
             end_pos: A tuple representing the current location of the piece.
         """
         self.move_piece(self._moves_made[-1][1], self._moves_made[-1][0])
+        end_pos_0 = self._moves_made[-1][0][0]
+        end_pos_1 = self._moves_made[-1][0][1]
+        self._board[end_pos_0][end_pos_1] = self._pieces_captured[-2]
 
     def __repr__(self):
         """
