@@ -1,9 +1,6 @@
 """
 Chess Board Implementation.
 """
-from multiprocessing.sharedctypes import Value
-from optparse import Values
-
 
 class ChessBoard:
     """
@@ -30,9 +27,9 @@ class ChessBoard:
         Fill board with variables and create piece instances.
         """
         self._board[7] = ["R", "N", "B", "Q", "K", "B", "N", "R"] # White back row
-        self._board[6] = ["P" + str(_) for _ in range (8)] # White pawns
+        self._board[6] = ["P" for _ in range (8)] # White pawns
         
-        self._board[1] = ["p" + str(_) for _ in range(8)] # Black pawns
+        self._board[1] = ["p" for _ in range(8)] # Black pawns
         self._board[0] = ["r", "n", "b", "q", "k", "b", "n", "r"] # Black back row
 
     def next_player(self):
@@ -180,8 +177,8 @@ class ChessBoard:
         # Move piece and replace previous square with a blank square.
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
         #if a piece is captured, add it to the pieces_captured list.
-        if self._board[end_pos[0]][end_pos[1]] != self.blank_square:
-            self._pieces_captured.append(self._board[end_pos[0]][end_pos[1]])
+        #for the sake of the undo functionality, blanks are also "captured".
+        self._pieces_captured.append(self._board[end_pos[0]][end_pos[1]])
         self._board[end_pos[0]][end_pos[1]] = game_piece
 
         # Adds move to moves_made list and flips the next player to move.
@@ -197,6 +194,9 @@ class ChessBoard:
             end_pos: A tuple representing the current location of the piece.
         """
         self.move_piece(self._moves_made[-1][1], self._moves_made[-1][0])
+        end_pos_0 = self._moves_made[-1][0][0]
+        end_pos_1 = self._moves_made[-1][0][1]
+        self._board[end_pos_0][end_pos_1] = self._pieces_captured[-2]
 
     def __repr__(self):
         """
