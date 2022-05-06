@@ -119,20 +119,27 @@ class ChessBoard:
         return "black"
 
     def check_legal_move(self, start_pos, end_pos):
+        """
+        Your docstring goes here.
+        """
         piece = self.get_piece(start_pos)
 
         if piece in ["P", "p"]:
-            self.check_pawn_move(start_pos, end_pos)
+            legal_moves = self.check_pawn_move(start_pos)
         if piece in ["R", "r"]:
-            self.check_rook_move(start_pos, end_pos)
+            legal_moves = self.check_rook_move(start_pos)
         if piece in ["N", "n"]:
-            self.check_knight_move(start_pos, end_pos)
+            legal_moves = self.check_knight_move(start_pos)
         if piece in ["B", "b"]:
-            self.check_bishop_move(start_pos, end_pos)
+            legal_moves = self.check_bishop_move(start_pos)
         if piece in ["Q", "q"]:
-            self.check_queen_move(start_pos, end_pos)
+            legal_moves = self.check_queen_move(start_pos)
         if piece in ["K", "k"]:
-            self.check_king_move(start_pos, end_pos)
+            legal_moves = self.check_king_move(start_pos)
+        
+        if end_pos not in legal_moves:
+            print("Not a legal move!")
+            raise ValueError
 
     def check_pawn_move(self, start_pos, end_pos):
         pass
@@ -172,14 +179,15 @@ class ChessBoard:
             print("You cannot capture your own piece!")
             raise ValueError
 
-
+        # All-in-one legal move checker.
+        #self.check_legal_move(start_pos, end_pos)
         
         # Move piece and replace previous square with a blank square.
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
         #if a piece is captured, add it to the pieces_captured list.
         #for the sake of the undo functionality, blanks are also "captured".
         self._pieces_captured.append(self._board[end_pos[0]][end_pos[1]])
-        self._board[end_pos[0]][end_pos[1]] = game_piece
+        self._board[end_pos[0]][end_pos[1]] = piece
 
         # Adds move to moves_made list and flips the next player to move.
         self._moves_made.append((start_pos, end_pos))
