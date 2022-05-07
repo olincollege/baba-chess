@@ -54,7 +54,6 @@ class TextController(ChessController):
             print(f"Error: '{input_number}' is not a valid move. "
                     "Input a new move.")
             return "Invalid Move"
-            # self.move()
 
     def lan_to_coords(self, lan_input):
         """
