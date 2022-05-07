@@ -19,7 +19,7 @@ class ChessBoard:
         self._next_player = self.player_1_color
         self._moves_made = []
         self._pieces_captured = []
-        # self._error_message = None
+        self._undo_flag = 0
         self.fill_generic_board()
 
     def fill_generic_board(self):
@@ -126,6 +126,9 @@ class ChessBoard:
 
         if piece in ["P", "p"]:
             legal_moves = self.check_pawn_move(start_pos)
+            if end_pos not in legal_moves:
+                print("Not a legal move!")
+                raise ValueError
         if piece in ["R", "r"]:
             legal_moves = self.check_rook_move(start_pos)
         if piece in ["N", "n"]:
@@ -137,12 +140,43 @@ class ChessBoard:
         if piece in ["K", "k"]:
             legal_moves = self.check_king_move(start_pos)
         
-        if end_pos not in legal_moves:
-            print("Not a legal move!")
-            raise ValueError
+        # if end_pos not in legal_moves:
+        #     print("Not a legal move!")
+        #     raise ValueError
 
-    def check_pawn_move(self, start_pos, end_pos):
-        pass
+    def check_pawn_move(self, start_pos):
+        row = start_pos[0]
+        col = start_pos[1]
+        moves = []
+        #TODO - Condense code 
+        if self.piece_color(self.get_piece(start_pos)) == "white":
+            if row == 1: #if first move, check the second square ahead
+                if self._board.get_piece((row, col)) == " ":
+                    moves.append((row + 2, col))
+            for i in range(-1,2):
+                (row, col) = (row+1, col+i)
+                if i == 0:
+                    if self.get_piece((row, col)) == " ":
+                        moves.append((row, col))
+                else:
+                    if self.get_piece((row, col)) != " " \
+                    or self.get_piece((row, col)) != self.is_white():
+                        moves.append((row, col))
+        else:
+            if row == 6:
+                (row, col) = (row-2, col)
+                if self.get_piece((row, col)) == " ":
+                    moves.append((row, col))
+            for i in range(-1,2):
+                (row, col) = (row-1, col+i)
+                if i == 0:
+                    if self.get_piece((row, col)) == " ":
+                        moves.append((row, col))
+                else:
+                    if self.get_piece((row, col)) != " " \
+                    or self.get_piece((row, col)) != self.is_white():
+                        moves.append((row, col))
+        return moves
 
     def check_rook_move(self, start_pos, end_pos):
         pass
@@ -169,15 +203,18 @@ class ChessBoard:
         """
         piece = self.get_piece(start_pos)
 
+        #TODO: Move both if statement into legal move checker and only run
+        # legal move checker when a move is not an undo move
         # Check if piece is an opponent's piece or a blank square.
-        if self.piece_color(piece) != self._next_player:
-            print("Not your own piece!")
-            raise ValueError
+        if self._undo_flag == 0:
+            if self.piece_color(piece) != self._next_player:
+                print("Not your own piece!")
+                raise ValueError
 
-        # Check if move will capture your own piece.
-        if self.piece_color(self.get_piece(end_pos)) == self.piece_color(piece):
-            print("You cannot capture your own piece!")
-            raise ValueError
+            # Check if move will capture your own piece.
+            if self.piece_color(self.get_piece(end_pos)) == self.piece_color(piece):
+                print("You cannot capture your own piece!")
+                raise ValueError
 
         # All-in-one legal move checker.
         #self.check_legal_move(start_pos, end_pos)
@@ -201,6 +238,7 @@ class ChessBoard:
             start_pos: A tuple representing the location of the piece before the move.
             end_pos: A tuple representing the current location of the piece.
         """
+        self._undo_flag = 1
         self.move_piece(self._moves_made[-1][1], self._moves_made[-1][0])
         end_pos_0 = self._moves_made[-1][0][0]
         end_pos_1 = self._moves_made[-1][0][1]
