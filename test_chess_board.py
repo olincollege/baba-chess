@@ -325,6 +325,23 @@ def test_invalid_games(board, bad_game): # pylint: disable=redefined-outer-name
     with pytest.raises(ValueError):
         board.move_piece(*moves[-1])
 
+def test_undo_move(board, game_repr): # pylint: disable=redefined-outer-name
+    """
+    Test that undoing a move properly restores the board to the state before the
+    move undone.
+    Args:
+        board: ChessBoard instance to use.
+        game: A tuple whose first element is a list of moves to be made in the
+            game, in order. The second element is a list of pieces that the
+            moves interact with.
+    """
+    moves, board_repr = game_repr
+    for start, end in moves:  # pylint: disable=redefined-outer-name
+        board.move_piece(start, end)
+    board.move_piece((6,7),(5,7)) # a move to be undone
+    board.undo_move()
+    assert str(board) == board_repr
+
 def test_repr(board, game_repr):  # pylint: disable=redefined-outer-name
     """
     Test that the board is correctly represented as a string in different
@@ -337,6 +354,6 @@ def test_repr(board, game_repr):  # pylint: disable=redefined-outer-name
             been made.
     """
     moves, board_repr = game_repr
-    for row, col in moves:  # pylint: disable=redefined-outer-name
-        board.move_piece(row, col)
+    for start, end in moves:  # pylint: disable=redefined-outer-name
+        board.move_piece(start, end)
     assert str(board) == board_repr
