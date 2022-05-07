@@ -44,9 +44,7 @@ class TextController(ChessController):
         """
 
         try:
-            input_number = input("Choose the piece you'd like to move and your "
-                                "end location(row_start column_start, row_end "
-                                "column_end):")
+            input_number = input("Input move, ie 'e2-e4': ")
             # If the move inputted by the player is "quit", the game is over.
             if input_number == "quit" or input_number == "undo":
                 return input_number
@@ -76,7 +74,7 @@ class TextController(ChessController):
         translate_ranks = translation_dicts[1]
         translate_files = translation_dicts[0]
         # Parse inputs to translate
-        lan_inputs = [i for i in lan_input.split(", ")]
+        lan_inputs = [i for i in lan_input.split("-")]
         # Assign start and end positions from inputs
         lan_start = lan_inputs[0]
         lan_end = lan_inputs[1]
