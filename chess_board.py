@@ -7,7 +7,17 @@ from selectors import PollSelector
 
 class ChessBoard:
     """
-    Your docstring goes here.
+    Chess board with built-in legal move checker.
+
+    Attrubutes:
+        player_1_color: A string representing the first player's color.
+        player_2_color: A string representing the second player's color.
+        blank_square: A string representing a blank square symbol.
+        _board: A list of lists representing the squares of the board.
+        _next_player: A string representing the color of the player to move.
+        _moves_made: A list of tuples representing the moves that have been made.
+        _pieces_captured: A list of single character strings representing the pieces that have been captured.
+        _undo_flag: An integer representing the 
     """
 
     player_1_color = "white"
@@ -338,6 +348,7 @@ class ChessBoard:
         end_pos_0 = self._moves_made[-1][0][0]
         end_pos_1 = self._moves_made[-1][0][1]
         self._board[end_pos_0][end_pos_1] = self._pieces_captured[-2]
+        self._undo_flag = 0
 
     def __repr__(self):
         """
