@@ -20,7 +20,7 @@ To begin using this code, clone this repository onto a directory of your choice.
 Testing the code is not necessary for game play, but to make sure that the code is working properly before running the game, it will be helpful to run these tests.
 
 Firstly, ensure that you are in the directory where the clone of this repository lives. Then run `pytest`. If all goes well you should see the following screen
-![Passed_unit_tests](./images) {INSERT IMAGE OF ALL UNIT TESTS PASSING}.
+![Passed_unit_tests](./images/passedunittests.PNG) {INSERT IMAGE OF ALL UNIT TESTS PASSING}.
 
 ## Play the Game
 The board is set up such that the uppercase letters represent the white player, and the lower case letters represent the black player. The current revision now takes in LAN (long algebraic notation). Note that we are using a simplified version of LAN, such that only the "spots" are noted. For example, to make the move e4 in standard algebraic notation, it would be `e2-e4` in our implementation. For the move Nf6 in standard algebraic notation, that move would be made with the input `g8-f6` which moves the piece at g8 (in this case the black knight) to the spot f6. Please refer to the table below for Chess notation translations.
