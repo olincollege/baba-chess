@@ -189,8 +189,9 @@ class ChessBoard:
         piece = self.get_piece(start_pos)
         if self.piece_color(piece) == "white":
             if row == 6: #if first move, check the second square ahead
-                if self.get_piece((row - 2, col)) == " ": #TODO add check to make sure this does not jump a piece
-                    moves.append((row - 2, col))
+                if self.get_piece((row - 2, col)) == " " and \
+                    self.get_piece((row - 1, col)) == " ":
+                        moves.append((row - 2, col))
             for i in range(-1,2):
                 test_pos = (row - 1, col + i)
                 if self._in_bound(test_pos):
@@ -201,7 +202,8 @@ class ChessBoard:
                         moves.append(test_pos)
         else:
             if row == 1:
-                if self.get_piece((row + 2, col)) == " ":
+                if self.get_piece((row + 2, col)) == " " and \
+                    self.get_piece((row + 1, col)) == " ":
                     moves.append((row + 2, col))
             for i in range(-1,2):
                 test_pos = (row + 1, col + i)
