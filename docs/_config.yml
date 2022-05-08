@@ -17,6 +17,21 @@ atom_feed:
 header:
   show_overlay_excerpt: false
 
+footer:
+  links:
+    - label: "Project"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/olincollege/baba-chess/"
+    - label: "Omar"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/supah32/"
+    - label: "Drew"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/drewnotdrew/"
+    - label: "Arturo"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/ArturoJoya/"
+
 defaults:
   - values:
       layout: single
