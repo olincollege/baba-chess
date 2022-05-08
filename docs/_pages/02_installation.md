@@ -16,7 +16,7 @@ Note, testing the code is not necessary for gameplay; however, it is provided as
 ## Step 3 (optional) - Testing the Code
 To test the code, make sure that you are in the directory where your clone of this repository lives, and run the command `pytest`. If there are no errors, you should get the following screen.
 
-![UnitTestSuccess](./images/UnitTestsSuccess.PNG)
+![UnitTestSuccess](./docs/assets/images/passedunittests.PNG)
 
 You are now ready to play a game of chess!
 ## Step 4 - Launch the game
