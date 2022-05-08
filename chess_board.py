@@ -2,9 +2,7 @@
 Chess Board Implementation.
 """
 
-from selectors import PollSelector
-
-def _in_bound(pos):
+def in_bound(pos):
     """
     Return a bool based on if a position is on the board.
 
@@ -38,6 +36,24 @@ def get_piece_color(piece):
     if piece.isupper():
         return "white"
     return "black"
+
+def opponent_color(piece):
+    """
+    Return the opponent color of a piece in a given square.
+
+    Args:
+        piece: A string representing a chess piece.
+
+    Returns:
+        A string representing the opponent color of a given piece. "white"
+        if the piece is white, "black" if the piece is black, and "blank" if
+        there is no piece at the given square.
+    """
+    if piece == " ":
+        return "blank"
+    if piece.isupper():
+        return "black"
+    return "white"
 
 class ChessBoard:
     """
@@ -119,24 +135,6 @@ class ChessBoard:
         """
         return self._board[pos[0]][pos[1]]
 
-    def _opponent_color(self, piece):
-        """
-        Return the opponent color of a piece in a given square.
-
-        Args:
-            piece: A string representing a chess piece.
-
-        Returns:
-            A string representing the opponent color of a given piece. "white"
-            if the piece is white, "black" if the piece is black, and "blank" if
-            there is no piece at the given square.
-        """
-        if piece == " ":
-            return "blank"
-        if piece.isupper():
-            return "black"
-        return "white"
-
     def check_legal_move(self, start_pos, end_pos):
         """
         Based on a start and end position as well as the piece type, check the
@@ -197,7 +195,7 @@ class ChessBoard:
                     moves.append((row - 2, col))
             for i in range(-1,2):
                 test_pos = (row - 1, col + i)
-                if _in_bound(test_pos):
+                if in_bound(test_pos):
                     if i == 0:
                         if self.get_piece(test_pos) == " ":
                             moves.append(test_pos)
@@ -210,7 +208,7 @@ class ChessBoard:
                     moves.append((row + 2, col))
             for i in range(-1,2):
                 test_pos = (row + 1, col + i)
-                if _in_bound(test_pos):
+                if in_bound(test_pos):
                     if i == 0:
                         if self.get_piece(test_pos) == " ":
                             moves.append(test_pos)
@@ -236,7 +234,7 @@ class ChessBoard:
         for direction in orth:
             for i in range(1,8):
                 test_pos = (row + i*direction[0], col + i*direction[1])
-                if _in_bound(test_pos):
+                if in_bound(test_pos):
                     if self.get_piece(test_pos) == " ":
                         moves.append(test_pos)
                     if get_piece_color(self.get_piece(test_pos)) == \
@@ -263,11 +261,12 @@ class ChessBoard:
         moves = []
         row = start_pos[0]
         col = start_pos[1]
-        in_L = [(1,2), (1,-2), (-1,2), (-1,-2), (2,1), (2,-1), (-2,1), (-2,-1)]
-        opp_color = self._opponent_color(self.get_piece(start_pos))
-        for direction in in_L:
+        possible_moves = [(1,2), (1,-2), (-1,2), (-1,-2), (2,1), (2,-1), \
+            (-2,1), (-2,-1)]
+        opp_color = opponent_color(self.get_piece(start_pos))
+        for direction in possible_moves:
             test_pos = (row + direction[0], col + direction[1])
-            if _in_bound(test_pos):
+            if in_bound(test_pos):
                 if get_piece_color(self.get_piece(test_pos)) in \
                     ["blank", opp_color]:
                     moves.append(test_pos)
@@ -291,7 +290,7 @@ class ChessBoard:
         for direction in diag:
             for i in range(1,8):
                 test_pos = (row + i*direction[0], col +i*direction[1])
-                if _in_bound(test_pos):
+                if in_bound(test_pos):
                     if self.get_piece(test_pos) == " ":
                         moves.append(test_pos)
                     if get_piece_color(self.get_piece(test_pos)) == \
@@ -325,7 +324,7 @@ class ChessBoard:
         for direction in full:
             for i in range(1,8):
                 test_pos = (row + i*direction[0], col + i*direction[1])
-                if _in_bound(test_pos):
+                if in_bound(test_pos):
                     if self.get_piece(test_pos) == " ":
                         moves.append(test_pos)
                     if get_piece_color(self.get_piece(test_pos)) == \
@@ -355,10 +354,10 @@ class ChessBoard:
         orth = [(1,0), (-1,0), (0,1), (0,-1)]
         diag = [(1,1), (-1,1), (1,-1), (-1,-1)]
         full = orth + diag # king's range is both orthogonal and diagonal
-        opp_color = self._opponent_color(self.get_piece(start_pos))
+        opp_color = opponent_color(self.get_piece(start_pos))
         for direction in full:
             test_pos = (row + direction[0], col + direction[1])
-            if _in_bound(test_pos):
+            if in_bound(test_pos):
                 if get_piece_color(self.get_piece(test_pos)) in \
                     ["blank", opp_color]:
                     moves.append(test_pos)
