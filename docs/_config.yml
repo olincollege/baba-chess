@@ -1,12 +1,10 @@
 title: BabaChess
 url: https://olincollege.github.io/baba-chess/
 logo: "/assets/images/knight.png"
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+minimal_mistakes_skin: "sunrise"
 
 markdown: "kramdown"
-
-# Build settings
-theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "sunrise"
 
 plugins:
  - jekyll-feed
