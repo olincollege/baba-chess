@@ -2,10 +2,10 @@ main:
   - title: "Home"
     url: /
   - title: "Installation"
-    url: /installation
+    url: /installation/
   - title: "Rules"
-    url: /usage
+    url: /rules/
   - title: "About Us"
-    url: /about
+    url: /about/
   - title: "Repo"
-    url: https://github.com/olincollege/baba-chess
+    url: https://github.com/olincollege/baba-chess/

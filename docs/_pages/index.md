@@ -3,22 +3,28 @@ title: BabaChess
 permalink: /
 ---
 
-Welcome to Baba Chess  - your neighborhood, cheap, knock-off version of a text-based chess board that you can run on Python (and only Python). Don’t know how to play chess? Don’t worry, we won’t teach you - will we call you out on it though? Heck yeah!
-{Screenshots of illegal move msgs}
-
-`Not a legal move!`
+Welcome to Baba Chess - your neighborhood, cheap, knock-off version of a text-based chess board that you can run on Python (and only Python). Don’t know how to play chess? Don’t worry, we won’t teach you - will we call you out on it though? Heck yeah!
+![illegal_move_msg](./assets/images/Screenshot 2022-05-08 005547.png)
 
 Show off to your friends that you can really play chess by avoiding these illegal-move errors (or don’t, that’s fine).  
+
 Our chess board supports the following functions:
+
 * In terminal gameplay
-* Basic piece movements {insert image}
-* LAN Coordinate inputs {insert image}
+
+* Basic piece movements
+
+* LAN Coordinate inputs
+
 * Undo
 
 
 The text based format allows us to display our game pieces in many different environments (especially those that may not support glyphs like the linux terminal). The following is a legend to how our pieces are named and what they represent.
 
-(Insert Table here)
+|     |Pawn♙|Knight♞|Bishop♗|Rook♜|Queen♕|King♚|
+|-----|:----:|:------:|:------:|:---:|:-----:|:----:|
+|Black|p|n|b|r|q|k|
+|White|P|N|B|R|Q|K|
 
 Check out sample gameplay here:
 
