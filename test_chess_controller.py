@@ -93,9 +93,11 @@ def test_draw(board, move_case, monkeypatch):
         for col in range(8):
             if (row, col) in check_squares:
                 if len(check_squares[(row, col)]) != 1:
-                    assert board.get_piece((row, col)) == check_squares[(row, col)][-1]
+                    assert board.get_piece((row, col)) == \
+                    check_squares[(row, col)][-1]
                 else:
-                    assert board.get_piece((row, col)) == check_squares[(row, col)]
+                    assert board.get_piece((row, col)) == \
+                    check_squares[(row, col)]
             elif 2 <= row <= 5:
                 assert board.get_piece((row, col)) == board.blank_square
 

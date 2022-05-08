@@ -32,7 +32,8 @@ board_moves = [
     # Scandinavian Opening (Queen)
      ([((6,4),(4,4)),((1,3),(3,3)),((4,4),(3,3)),((0,3),(3,3))],
       [("P"," "),("p"," "),("P","p"),("q","P")],
-      [("white","blank"),("black","blank"),("white","black"),("black","white")]),
+      [("white","blank"),("black","blank"),("white","black"), \
+      ("black","white")]),
     # Bongcloud (King)
     ([((6,4),(4,4)),((1,4),(3,4)),((7,4),(6,4))],
      [("P"," "),("p"," "),("K"," ")],
