@@ -244,7 +244,7 @@ def test_first_move(board):  # pylint: disable=redefined-outer-name
         board: The ChessBoard instance to use.
     """
     assert board.next_player() == "white"
-    
+
 def test_next_player(board, game):  # pylint: disable=redefined-outer-name
     """
     Test that the board correctly selects the next player to move.
@@ -285,12 +285,12 @@ def test_is_occupied(board, game): # pylint: disable=redefined-outer-name
             moves interact with.
     """
     moves,_,_ = game
-    for i in range(len(moves)):
+    for i in range(len(moves)): # pylint: disable=consider-using-enumerate
         for j in range(2):
             if board.get_piece(moves[i][j]) == " ":
-                assert board.is_occupied(moves[i][j]) == False
+                assert board.is_occupied(moves[i][j]) is False
             else:
-                assert board.is_occupied(moves[i][j]) == True
+                assert board.is_occupied(moves[i][j]) is True
         board.move_piece(*moves[i])
 
 def test_piece_color(board, game): # pylint: disable=redefined-outer-name
@@ -305,7 +305,7 @@ def test_piece_color(board, game): # pylint: disable=redefined-outer-name
             moves interact with.
     """
     moves,_,colors = game
-    for i in range(len(moves)):
+    for i in range(len(moves)): # pylint: disable=consider-using-enumerate
         assert board.piece_color(board.get_piece(moves[i][0])) == colors[i][0]
         assert board.piece_color(board.get_piece(moves[i][1])) == colors[i][1]
         board.move_piece(*moves[i])
