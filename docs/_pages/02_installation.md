@@ -22,4 +22,4 @@ You are now ready to play a game of chess!
 ## Step 4 - Launch the game
 In order to launch the game simply run the following command in your terminal `python chess_game.py main`
 You should get the following prompt
-![InitialScreen](./assets/images/initscreen.PNG)
+![InitialScreen](./docs/assets/images/initscreen.PNG)
