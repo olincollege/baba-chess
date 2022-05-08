@@ -48,55 +48,56 @@ class TextController(ChessController):
             # If the move inputted by the player is "quit", the game is over.
             if input_number in ('quit', 'undo'):
                 return input_number
-            coordinate_tuples = self.lan_to_coords((input_number))
+            coordinate_tuples = lan_to_coords((input_number))
             self._board.move_piece(coordinate_tuples[0], coordinate_tuples[1])
+            return None
         except (ValueError, KeyError, IndexError):
             print(f"Error: '{input_number}' is not a valid move. "
                     "Input a new move.")
             return "Invalid Move"
 
-    def lan_to_coords(self, lan_input):
-        """
-        Takes the player's algebraic notation input and translates it to tuple
-        form for the ChessBoard class to use.
+def lan_to_coords(lan_input):
+    """
+    Takes the player's algebraic notation input and translates it to tuple
+    form for the ChessBoard class to use.
 
-        Args:
-            lan_input: A string representing a chess long-algebraic-notation
-                player input.
+    Args:
+        lan_input: A string representing a chess long-algebraic-notation
+            player input.
 
-        Returns:
-            Returns a tuple of tuples representing the coordinates for the start
-            and end coordinates for the ChessBoard class to implement.
-        """
-        # first dict is files, second is ranks
-        translation_dicts = self._translate_coords()
-        translate_ranks = translation_dicts[1]
-        translate_files = translation_dicts[0]
-        # Parse inputs to translate
-        lan_inputs = [i for i in lan_input.split("-")]
-        # Assign start and end positions from inputs
-        lan_start = lan_inputs[0]
-        lan_end = lan_inputs[1]
-        return ((translate_ranks[int(lan_start[1])],\
-                 translate_files[lan_start[0]]),\
-                (translate_ranks[int(lan_end[1])],\
-                 translate_files[lan_end[0]]))
+    Returns:
+        Returns a tuple of tuples representing the coordinates for the start
+        and end coordinates for the ChessBoard class to implement.
+    """
+    # first dict is files, second is ranks
+    translation_dicts = _translate_coords()
+    translate_ranks = translation_dicts[1]
+    translate_files = translation_dicts[0]
+    # Parse inputs to translate
+    lan_inputs = list(lan_input.split('-'))
+    # Assign start and end positions from inputs
+    lan_start = lan_inputs[0]
+    lan_end = lan_inputs[1]
+    return ((translate_ranks[int(lan_start[1])],\
+                translate_files[lan_start[0]]),\
+            (translate_ranks[int(lan_end[1])],\
+                translate_files[lan_end[0]]))
 
-    def _translate_coords(self):
-        """
-        Initializes the dictionaries to be used in order to translate the
-        player input from long algebraic notation (LAN) to tuple form.
+def _translate_coords():
+    """
+    Initializes the dictionaries to be used in order to translate the
+    player input from long algebraic notation (LAN) to tuple form.
 
-        Returns:
-        Returns a list of dictionaries representing the translation dictionaries
-            to be used as a helper for the lan_to_coords method.
-        """
-        # Generate the translation dictionaries
-        files = "abcdefgh"
-        translate_files = {}
-        translate_ranks = {}
-        for i in range(8):
-            translate_files[files[i]] = i
-            translate_ranks[8-i] = i
+    Returns:
+    Returns a list of dictionaries representing the translation dictionaries
+        to be used as a helper for the lan_to_coords method.
+    """
+    # Generate the translation dictionaries
+    files = "abcdefgh"
+    translate_files = {}
+    translate_ranks = {}
+    for i in range(8):
+        translate_files[files[i]] = i
+        translate_ranks[8-i] = i
 
-        return [translate_files,translate_ranks]
+    return [translate_files,translate_ranks]

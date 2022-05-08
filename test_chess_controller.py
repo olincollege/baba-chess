@@ -5,7 +5,7 @@ import io
 import pytest
 from chess_board import ChessBoard
 from chess_controller import TextController
-
+from chess_controller import lan_to_coords
 
 @pytest.fixture(name='board')
 def chess_board():
@@ -116,4 +116,4 @@ def test_lan_to_coords(board, lan, tuples):
             is implemented within the Model class.
     """
     controller = TextController(board)
-    assert controller.lan_to_coords(lan) == tuples
+    assert lan_to_coords(lan) == tuples
