@@ -157,9 +157,8 @@ class ChessBoard:
         if piece in ["Q", "q"]:
             legal_moves = self.check_queen_move(start_pos)
         if piece in ["K", "k"]:
-            #legal_moves = self.check_king_move(start_pos)
-            pass
-        print(legal_moves)
+            legal_moves = self.check_king_move(start_pos)
+
         if end_pos not in legal_moves:
             print("Not a legal move!")
             raise ValueError
@@ -275,7 +274,20 @@ class ChessBoard:
         return moves
 
     def check_king_move(self, start_pos):
-        pass
+        moves = []
+        row = start_pos[0]
+        col = start_pos[1]
+        orth = [(1,0), (-1,0), (0,1), (0,-1)]
+        diag = [(1,1), (-1,1), (1,-1), (-1,-1)]
+        full = orth + diag # king's range is both orthogonal and diagonal
+        opp_color = self._opponent_color(self.get_piece(start_pos))
+        for direction in full:
+            test_pos = (row + direction[0], col + direction[1])
+            print(test_pos)
+            if self._in_bound(test_pos):
+                if self.piece_color(self.get_piece(test_pos)) in ["blank", opp_color]:
+                        moves.append(test_pos)
+        return moves
 
     def move_piece(self, start_pos, end_pos):
         """
