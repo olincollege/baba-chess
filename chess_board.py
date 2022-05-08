@@ -99,6 +99,16 @@ class ChessBoard:
             return True
         return False
 
+    def _in_bound(self, pos):
+        """
+        Your docsting here
+        """
+        try:
+            self.get_piece(pos)
+            return True
+        except:
+            return False
+
     def piece_color(self, piece):
         """
         Returns a the color of a piece in a given square.
@@ -127,12 +137,8 @@ class ChessBoard:
         if piece in ["P", "p"]:
             legal_moves = self.check_pawn_move(start_pos)
             print(legal_moves)
-            if end_pos not in legal_moves:
-                print("Not a legal move!")
-                raise ValueError
         if piece in ["R", "r"]:
-            pass
-            #legal_moves = self.check_rook_move(start_pos)
+            legal_moves = self.check_rook_move(start_pos)
         if piece in ["N", "n"]:
             #legal_moves = self.check_knight_move(start_pos)
             pass
@@ -146,9 +152,9 @@ class ChessBoard:
             #legal_moves = self.check_king_move(start_pos)
             pass
         
-        # if end_pos not in legal_moves:
-        #     print("Not a legal move!")
-        #     raise ValueError
+        if end_pos not in legal_moves:
+            print("Not a legal move!")
+            raise ValueError
 
     def check_pawn_move(self, start_pos):
         row = start_pos[0]
@@ -188,11 +194,10 @@ class ChessBoard:
         orth = [(1,0), (-1,0), (0,1), (0,-1)] #define directions for movement
         for direction in orth:
             for i in range(7):
-                (row, col) = (row + i*direction[0], col +i*direction[1])
-                if self.in_bound((row, col)):
-                    if self._board.get_piece((row, col)) == " " \
-                    or self._board.get_piece((row, col)) != self.is_white():
-                        moves.append((row, col))
+                test_pos = (row + i*direction[0], col +i*direction[1])
+                    if self._board.get_piece(test_pos) == " " \
+                    or self._board.get_piece(test_pos) != self.is_white():
+                        moves.append(test_pos)
                 else:
                     break
         return moves
