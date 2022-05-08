@@ -12,7 +12,7 @@ Although the following is not essential for gameplay, it is helpful to have Pyte
 ## Use the Code
 To begin using this code, clone this repository onto a directory of your choice. You will want to make sure that you have `chess_board_alternative`, `chess_view`, `chess_controller`, and `chess_game`.
 - Open a new terminal, make sure that you are in the same directory as the code.
-- Run `python chess_game.py main` on the terminal.
+- Run `python chess_game.py` on the terminal.
 - That's all! you should see the following prompt on the screen: {TODO: UPDATE IMAGE}
 ![Initial_Chess Prompt](./images/mvpchessview.PNG)
 
