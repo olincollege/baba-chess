@@ -2,6 +2,9 @@
 Chess Board Implementation.
 """
 
+from selectors import PollSelector
+
+
 class ChessBoard:
     """
     Your docstring goes here.
@@ -103,11 +106,10 @@ class ChessBoard:
         """
         Your docsting here
         """
-        try:
-            self.get_piece(pos)
-            return True
-        except:
-            return False
+        if pos[0] in range(0,8):
+            if pos[1] in range(0,8):
+                return True
+        return False
 
     def piece_color(self, piece):
         """
@@ -136,7 +138,6 @@ class ChessBoard:
 
         if piece in ["P", "p"]:
             legal_moves = self.check_pawn_move(start_pos)
-            print(legal_moves)
         if piece in ["R", "r"]:
             legal_moves = self.check_rook_move(start_pos)
         if piece in ["N", "n"]:
@@ -151,7 +152,7 @@ class ChessBoard:
         if piece in ["K", "k"]:
             #legal_moves = self.check_king_move(start_pos)
             pass
-        
+        print(legal_moves)
         if end_pos not in legal_moves:
             print("Not a legal move!")
             raise ValueError
@@ -166,7 +167,6 @@ class ChessBoard:
             if row == 6: #if first move, check the second square ahead
                 if self.get_piece((row - 2, col)) == " ": #TODO add check to make sure this does not jump a piece
                     moves.append((row - 2, col))
-                    #print("made it here")
             for i in range(-1,2):
                 test_pos = (row - 1, col + i)
                 if self._in_bound(test_pos):
@@ -189,21 +189,21 @@ class ChessBoard:
                         moves.append(test_pos)
         return moves
 
-    def check_rook_move(self, start_pos, end_pos):
+    def check_rook_move(self, start_pos):
         moves = []
         row = start_pos[0]
         col = start_pos[1]
-        orth = [(1,0), (-1,0), (0,1), (0,-1)] #define directions for movement
+        orth = [(1,0), (-1,0), (0,1), (0,-1)] # define directions for movement
         piece_color = self.piece_color(self.get_piece(start_pos))
         for direction in orth:
-            for i in range(7):
+            for i in range(1,8):
                 test_pos = (row + i*direction[0], col + i*direction[1])
                 if self._in_bound(test_pos):
                     if self.get_piece(test_pos) == " ":
                         moves.append(test_pos)
-                    if self.get_piece(test_pos) == piece_color:
+                    if self.piece_color(self.get_piece(test_pos)) == piece_color:
                         break
-                    else:
+                    if self.piece_color(self.get_piece(test_pos)) not in ["blank", piece_color]:
                         moves.append(test_pos)
                         break
                 else:
@@ -278,11 +278,13 @@ class ChessBoard:
         Return a string representing the contents of the board.
         """
         files = "   a b c d e f g h" 
+        # files = "   0 1 2 3 4 5 6 7"
         row_divider = "  " + ("+-" * 8) + "+"
         lines = [files, row_divider]
         for i in range(8):
             pieces_row = [self._board[i][_][0] for _ in range(8)]
             row = f"{8-i} |{'|'.join(pieces_row)}| {8-i}"
+            # row = f"{8-i} |{'|'.join(pieces_row)}| {8-i}"
             lines.append(row)
             lines.append(row_divider)
         lines.append(files)
