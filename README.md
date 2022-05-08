@@ -23,7 +23,7 @@ Firstly, ensure that you are in the directory where the clone of this repository
 ![Passed_unit_tests](./images) {INSERT IMAGE OF ALL UNIT TESTS PASSING}.
 
 ## Play the Game
-The board is set up such that the uppercase letters represent the white player, and the lower case letters represent the black player. The current revision now takes in RAN (reversible algebraic notation). Note that we are using a simplified version of RAN, such that only the "spots" are noted. For example, to make the move e4 in standard algebraic notation, it would be `e2-e4` in our implementation. For the move Nf6 in standard algebraic notation, that move would be made with the input `g8-f6` which moves the piece at g8 (in this case the black knight) to the spot f6. Please refer to the table below for Chess notation translations.
+The board is set up such that the uppercase letters represent the white player, and the lower case letters represent the black player. The current revision now takes in LAN (long algebraic notation). Note that we are using a simplified version of LAN, such that only the "spots" are noted. For example, to make the move e4 in standard algebraic notation, it would be `e2-e4` in our implementation. For the move Nf6 in standard algebraic notation, that move would be made with the input `g8-f6` which moves the piece at g8 (in this case the black knight) to the spot f6. Please refer to the table below for Chess notation translations.
 ![Chess_notations_chart](./images/chessnotations.png)
 
 *Note*, castling and pawn promotions have not been implemented yet, therefore those commands should not be attempted as they will result in an invalid-move-prompt.
