@@ -22,7 +22,7 @@ def main():
     current_player = None
     #Print out a set of rules and allowed inputs
     print("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"\
-          "Hello and Welcome to Baba-Chess 1.2, a simple text-based Python\n"\
+          "Hello and welcome to BabaChess 1.2, a simple text-based Python\n"\
           "implementation of a chess board. In order to make a\n"\
           "move on the board, please enter your moves in Long Algebraic\n"\
           "Notation (ie. e2-e4). When prompted to move, there are three valid"\

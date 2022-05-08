@@ -36,7 +36,7 @@ In order to launch the game simply run the following command in your terminal `p
 You should get the following prompt:
 ```
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-Hello and Welcome to Baba-Chess 1.2, a simple text-based Python
+Hello and Welcome to BabaChess 1.2, a simple text-based Python
 implementation of a chess board. In order to make a
 move on the board, please enter your moves in Long Algebraic
 Notation (ie. e2-e4). When prompted to move, there are three valid

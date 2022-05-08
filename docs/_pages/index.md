@@ -3,7 +3,7 @@ title: Chess in Python?
 permalink: /
 ---
 
-Welcome to Baba Chess - your neighborhood, cheap, knock-off version of a text-based chess board that you can run on Python (and only Python). Don’t know how to play chess? Don’t worry, we won’t teach you - will we call you out on it though? Heck yeah!
+Welcome to BabaChess - your neighborhood, cheap, knock-off version of a text-based chess board that you can run on Python (and only Python). Don’t know how to play chess? Don’t worry, we won’t teach you - will we call you out on it though? Heck yeah!
 
 ```bash
 Not a legal move!

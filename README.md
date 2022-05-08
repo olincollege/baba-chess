@@ -1,4 +1,4 @@
-# baba-chess (Rev.1.2)
+# BabaChess (Rev.1.2)
 Omar Salih, Arturo Joya, Drew Pang
 
 This repository contains the necessary files needed to run a game of Chess in Python.
@@ -16,7 +16,7 @@ To begin using this code, clone this repository onto a directory of your choice.
 - That's all! you should see the following prompt on the screen:
 ```
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-Hello and Welcome to Baba-Chess 1.2, a simple text-based Python
+Hello and welcome to BabaChess 1.2, a simple text-based Python
 implementation of a chess board. In order to make a
 move on the board, please enter your moves in Long Algebraic
 Notation (ie. e2-e4). When prompted to move, there are three valid movetypes.
