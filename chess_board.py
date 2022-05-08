@@ -189,12 +189,13 @@ class ChessBoard:
 
     def check_rook_move(self, start_pos, end_pos):
         moves = []
-        row = self.start_pos[0]
-        col = self.start_pos[1]
+        row = start_pos[0]
+        col = start_pos[1]
         orth = [(1,0), (-1,0), (0,1), (0,-1)] #define directions for movement
         for direction in orth:
             for i in range(7):
                 test_pos = (row + i*direction[0], col +i*direction[1])
+                if self.in_bound((row, col)):
                     if self._board.get_piece(test_pos) == " " \
                     or self._board.get_piece(test_pos) != self.is_white():
                         moves.append(test_pos)
