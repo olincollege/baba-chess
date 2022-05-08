@@ -2,7 +2,7 @@
 Unit tests for Chess Board
 """
 import pytest
-from chess_board import ChessBoard
+from chess_board import ChessBoard, get_piece_color
 
 
 @pytest.fixture
@@ -274,26 +274,7 @@ def test_get_piece(board, game): # pylint: disable=redefined-outer-name
         assert board.get_piece(moves[i][1]) == pieces[i][1]
         board.move_piece(*moves[i])
 
-def test_is_occupied(board, game): # pylint: disable=redefined-outer-name
-    """
-    Test that the board correctly identifies the piece in a square, and that it
-    returns True is there is a piece, and False if it detects a blank space.
-    Args:
-        board: ChessBoard instance to use.
-        game: A tuple whose first element is a list of moves to be made in the
-            game, in order. The second element is a list of pieces that the
-            moves interact with.
-    """
-    moves,_,_ = game
-    for i in range(len(moves)): # pylint: disable=consider-using-enumerate
-        for j in range(2):
-            if board.get_piece(moves[i][j]) == " ":
-                assert board.is_occupied(moves[i][j]) is False
-            else:
-                assert board.is_occupied(moves[i][j]) is True
-        board.move_piece(*moves[i])
-
-def test_piece_color(board, game): # pylint: disable=redefined-outer-name
+def test_get_piece_color(board, game): # pylint: disable=redefined-outer-name
     """
     Test that the board correctly identifies the piece in a square, and that it
     returns "white" for a white piece (uppercase letter), "black" for a black
@@ -306,8 +287,8 @@ def test_piece_color(board, game): # pylint: disable=redefined-outer-name
     """
     moves,_,colors = game
     for i in range(len(moves)): # pylint: disable=consider-using-enumerate
-        assert board.piece_color(board.get_piece(moves[i][0])) == colors[i][0]
-        assert board.piece_color(board.get_piece(moves[i][1])) == colors[i][1]
+        assert get_piece_color(board.get_piece(moves[i][0])) == colors[i][0]
+        assert get_piece_color(board.get_piece(moves[i][1])) == colors[i][1]
         board.move_piece(*moves[i])
 
 def test_invalid_games(board, bad_game): # pylint: disable=redefined-outer-name
