@@ -126,19 +126,25 @@ class ChessBoard:
 
         if piece in ["P", "p"]:
             legal_moves = self.check_pawn_move(start_pos)
+            print(legal_moves)
             if end_pos not in legal_moves:
                 print("Not a legal move!")
                 raise ValueError
         if piece in ["R", "r"]:
-            legal_moves = self.check_rook_move(start_pos)
+            pass
+            #legal_moves = self.check_rook_move(start_pos)
         if piece in ["N", "n"]:
-            legal_moves = self.check_knight_move(start_pos)
+            #legal_moves = self.check_knight_move(start_pos)
+            pass
         if piece in ["B", "b"]:
-            legal_moves = self.check_bishop_move(start_pos)
+            #legal_moves = self.check_bishop_move(start_pos)
+            pass
         if piece in ["Q", "q"]:
-            legal_moves = self.check_queen_move(start_pos)
+            #legal_moves = self.check_queen_move(start_pos)
+            pass
         if piece in ["K", "k"]:
-            legal_moves = self.check_king_move(start_pos)
+            #legal_moves = self.check_king_move(start_pos)
+            pass
         
         # if end_pos not in legal_moves:
         #     print("Not a legal move!")
@@ -148,38 +154,48 @@ class ChessBoard:
         row = start_pos[0]
         col = start_pos[1]
         moves = []
+        piece = self.get_piece(start_pos)
         #TODO - Condense code 
-        if self.piece_color(self.get_piece(start_pos)) == "white":
-            if row == 1: #if first move, check the second square ahead
-                if self._board.get_piece((row, col)) == " ":
+        if self.piece_color(piece) == "white":
+            if row == 6: #if first move, check the second square ahead
+                if self.get_piece((row - 2, col)) == " ": #TODO add check to make sure this does not jump a piece
+                    moves.append((row - 2, col))
+            print(moves)
+            for i in range(-1,2):
+                test_pos = (row - 1, col + i)
+                if i == 0:
+                    if self.get_piece(test_pos) == " ":
+                        moves.append(test_pos)
+                elif self.piece_color(self.get_piece(test_pos)) == "black":
+                    moves.append(test_pos)
+        else:
+            if row == 1:
+                if self.get_piece((row + 2, col)) == " ":
                     moves.append((row + 2, col))
             for i in range(-1,2):
-                (row, col) = (row+1, col+i)
+                test_pos = (row + 1, col + i)
                 if i == 0:
-                    if self.get_piece((row, col)) == " ":
-                        moves.append((row, col))
-                else:
-                    if self.get_piece((row, col)) != " " \
-                    or self.get_piece((row, col)) != self.is_white():
-                        moves.append((row, col))
-        else:
-            if row == 6:
-                (row, col) = (row-2, col)
-                if self.get_piece((row, col)) == " ":
-                    moves.append((row, col))
-            for i in range(-1,2):
-                (row, col) = (row-1, col+i)
-                if i == 0:
-                    if self.get_piece((row, col)) == " ":
-                        moves.append((row, col))
-                else:
-                    if self.get_piece((row, col)) != " " \
-                    or self.get_piece((row, col)) != self.is_white():
-                        moves.append((row, col))
+                    if self.get_piece(test_pos) == " ":
+                        moves.append(test_pos)
+                elif self.piece_color(self.get_piece(test_pos)) == "white":
+                    moves.append(test_pos)
         return moves
 
     def check_rook_move(self, start_pos, end_pos):
-        pass
+        moves = []
+        row = self.start_pos[0]
+        col = self.start_pos[1]
+        orth = [(1,0), (-1,0), (0,1), (0,-1)] #define directions for movement
+        for direction in orth:
+            for i in range(7):
+                (row, col) = (row + i*direction[0], col +i*direction[1])
+                if self.in_bound((row, col)):
+                    if self._board.get_piece((row, col)) == " " \
+                    or self._board.get_piece((row, col)) != self.is_white():
+                        moves.append((row, col))
+                else:
+                    break
+        return moves
 
     def check_knight_move(self, start_pos, end_pos):
         pass
@@ -216,8 +232,8 @@ class ChessBoard:
                 print("You cannot capture your own piece!")
                 raise ValueError
 
-        # All-in-one legal move checker.
-        #self.check_legal_move(start_pos, end_pos)
+            # All-in-one legal move checker.
+            self.check_legal_move(start_pos, end_pos)
         
         # Move piece and replace previous square with a blank square.
         self._board[start_pos[0]][start_pos[1]] = self.blank_square
@@ -272,68 +288,3 @@ class ChessBoard:
 
     
 """
-
-# def in_bound(self, pos):
-#         """
-#         Check that a position is within the bounds of the board.
-        
-#         Args:
-#             pos: A tuple representing the position the piece is wants to access.
-            
-#         Return:
-#             A bool representing whether the square is valid or not.
-#         """
-#         try: 
-#             self._board.get_piece(pos)
-#             return True
-#         except (IndexError):
-#             return False
-
-#     def is_white(self):
-#         """
-#         Return a bool of the piece's color. White = True, Black = False
-#         """
-#         return self.color
-
-#     def check_pawn_move(self, pos, color):
-#         """
-#         Calculate the possible moves to return a list of possible moves that
-#         the pawn piece could move to based of the position of the pawn.
-        
-#         Return: A list of tuples representing the moves that the piece can make.
-#         """
-#         row = self.pos[0]
-#         col = self.pos[1]
-#         moves = []
-#         #TODO - Condense code 
-#         if self.is_white():
-#             if self.first_move: #if first move, check the second square ahead
-#                 (row, col) = (row+2, col)
-#                 if self._board.get_piece((row, col)) == " ":
-#                     moves.append((row, col))
-#             for i in range(-1,2):
-#                 (row, col) = (row+1, col+i)
-#                 if i == 0:
-#                     if self._board.get_piece((row, col)) == " ":
-#                         moves.append((row, col))
-#                 else:
-#                     if self.in_bound((row, col)):
-#                         if self._board.get_piece((row, col)) != " " \
-#                         or self._board.get_piece((row, col)) != self.is_white():
-#                             moves.append((row, col))
-#         else:
-#             if self.first_move:
-#                 (row, col) = (row-2, col)
-#                 if self._board.get_piece((row, col)) == " ":
-#                     moves.append((row, col))
-#             for i in range(-1,2):
-#                 (row, col) = (row-1, col+i)
-#                 if i == 0:
-#                     if self._board.get_piece((row, col)) == " ":
-#                         moves.append((row, col))
-#                 else:
-#                     if self.in_bound((row, col)):
-#                         if self._board.get_piece((row, col)) != " " \
-#                         or self._board.get_piece((row, col)) != self.is_white():
-#                             moves.append((row, col))
-#         return moves
