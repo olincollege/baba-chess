@@ -115,5 +115,4 @@ def test_lan_to_coords(board, lan, tuples):
         tuples: A tuple of tuples representing the translated user input. This
             is implemented within the Model class.
     """
-    controller = TextController(board)
     assert lan_to_coords(lan) == tuples
