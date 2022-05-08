@@ -30,8 +30,8 @@ move_cases = [
     # Row or column index too large.
     ("b2-b9\nb2-b9\np7-p8\ne2-e4", {(4, 4): "P"}),
     # A capture is made on white's 2nd move
-    ("f2-f4\nc7-c5\ng1-c5", {(4, 5): "P",
-                       (3, 2): ["p", "N"]}),
+    ("e2-e4\nb7-b5\nf1-b5", {(4, 4): "P",
+                       (3, 1): ["p", "B"]}),
 ]
 
 # Define sets of test cases.
@@ -80,7 +80,7 @@ def test_draw(board, move_case, monkeypatch):
             move = controller.move()
             if move is None:
                 valid_moves += 1
-    except EOFError:
+    except (EOFError, ValueError):
         pass
 
     # Check that the move method was called the appropriate number of times.
