@@ -166,25 +166,27 @@ class ChessBoard:
             if row == 6: #if first move, check the second square ahead
                 if self.get_piece((row - 2, col)) == " ": #TODO add check to make sure this does not jump a piece
                     moves.append((row - 2, col))
-            print(moves)
+                    #print("made it here")
             for i in range(-1,2):
                 test_pos = (row - 1, col + i)
-                if i == 0:
-                    if self.get_piece(test_pos) == " ":
+                if self._in_bound(test_pos):
+                    if i == 0:
+                        if self.get_piece(test_pos) == " ":
+                            moves.append(test_pos)
+                    elif self.piece_color(self.get_piece(test_pos)) == "black":
                         moves.append(test_pos)
-                elif self.piece_color(self.get_piece(test_pos)) == "black":
-                    moves.append(test_pos)
         else:
             if row == 1:
                 if self.get_piece((row + 2, col)) == " ":
                     moves.append((row + 2, col))
             for i in range(-1,2):
                 test_pos = (row + 1, col + i)
-                if i == 0:
-                    if self.get_piece(test_pos) == " ":
+                if self._in_bound(test_pos):
+                    if i == 0:
+                        if self.get_piece(test_pos) == " ":
+                            moves.append(test_pos)
+                    elif self.piece_color(self.get_piece(test_pos)) == "white":
                         moves.append(test_pos)
-                elif self.piece_color(self.get_piece(test_pos)) == "white":
-                    moves.append(test_pos)
         return moves
 
     def check_rook_move(self, start_pos, end_pos):
@@ -192,13 +194,18 @@ class ChessBoard:
         row = start_pos[0]
         col = start_pos[1]
         orth = [(1,0), (-1,0), (0,1), (0,-1)] #define directions for movement
+        piece_color = self.piece_color(self.get_piece(start_pos))
         for direction in orth:
             for i in range(7):
-                test_pos = (row + i*direction[0], col +i*direction[1])
-                if self.in_bound((row, col)):
-                    if self._board.get_piece(test_pos) == " " \
-                    or self._board.get_piece(test_pos) != self.is_white():
+                test_pos = (row + i*direction[0], col + i*direction[1])
+                if self._in_bound(test_pos):
+                    if self.get_piece(test_pos) == " ":
                         moves.append(test_pos)
+                    if self.get_piece(test_pos) == piece_color:
+                        break
+                    else:
+                        moves.append(test_pos)
+                        break
                 else:
                     break
         return moves
