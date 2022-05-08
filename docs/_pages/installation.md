@@ -1,6 +1,7 @@
 ---
 title: Installation
 permalink: /installation/
+order: 2
 ---
 
 # Getting the game

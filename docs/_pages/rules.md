@@ -1,6 +1,7 @@
 ---
 title: Rules
 permalink: /rules/
+order: 1
 ---
 
 # Rules of the game:
