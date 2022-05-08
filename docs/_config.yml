@@ -32,6 +32,8 @@ github_username:  supah32
 github_username:  drewnotdrew
 github_username:  ArturoJoya
 
+markdown: "kramdown"
+
 # Build settings
 theme: minima
 plugins:
@@ -56,3 +58,13 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# Disables RSS feed icon
+atom_feed:
+  hide: true
+
+header:
+  show_overlay_excerpt: false
+
+include:
+  - _pages
