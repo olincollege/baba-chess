@@ -146,6 +146,15 @@ class ChessBoard:
         """
         piece = self.get_piece(start_pos)
 
+        if self.piece_color(piece) != self._next_player:
+            print("Not your own piece!")
+            raise ValueError
+
+        # Check if move will capture your own piece.
+        if self.piece_color(self.get_piece(end_pos)) == self.piece_color(piece):
+            print("You cannot capture your own piece!")
+            raise ValueError
+
         if piece in ["P", "p"]:
             legal_moves = self.check_pawn_move(start_pos)
         if piece in ["R", "r"]:
@@ -283,7 +292,6 @@ class ChessBoard:
         opp_color = self._opponent_color(self.get_piece(start_pos))
         for direction in full:
             test_pos = (row + direction[0], col + direction[1])
-            print(test_pos)
             if self._in_bound(test_pos):
                 if self.piece_color(self.get_piece(test_pos)) in ["blank", opp_color]:
                         moves.append(test_pos)
@@ -303,15 +311,6 @@ class ChessBoard:
         # legal move checker when a move is not an undo move
         # Check if piece is an opponent's piece or a blank square.
         if self._undo_flag == 0:
-            if self.piece_color(piece) != self._next_player:
-                print("Not your own piece!")
-                raise ValueError
-
-            # Check if move will capture your own piece.
-            if self.piece_color(self.get_piece(end_pos)) == self.piece_color(piece):
-                print("You cannot capture your own piece!")
-                raise ValueError
-
             # All-in-one legal move checker.
             self.check_legal_move(start_pos, end_pos)
         
