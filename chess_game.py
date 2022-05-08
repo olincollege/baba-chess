@@ -33,8 +33,6 @@ def main():
           "version;\nhowever, progress is being made towards improving this "\
           "chess board.\n"\
           "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+")
-
-    #TODO find a win condition so this isn't an infinite loop
     while True:
         current_player = controllers[(board.next_player())]
         view.draw()
@@ -44,7 +42,7 @@ def main():
         # If the move inputted by the player is "quit", the game is over.
         if move == "quit":
             break
-        elif move == "undo":
+        if move == "undo":
             board.undo_move()
 
     print(f"{board.next_player()} has ended the game.")

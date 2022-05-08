@@ -46,7 +46,7 @@ class TextController(ChessController):
         try:
             input_number = input("Input your move ie. ('e2-e4'/undo/quit): ")
             # If the move inputted by the player is "quit", the game is over.
-            if input_number == "quit" or input_number == "undo":
+            if input_number in ('quit', 'undo'): #== "quit" or input_number == "undo":
                 return input_number
             coordinate_tuples = self.lan_to_coords((input_number))
             self._board.move_piece(coordinate_tuples[0], coordinate_tuples[1])
@@ -63,10 +63,10 @@ class TextController(ChessController):
         Args:
             lan_input: A string representing a chess long-algebraic-notation
                 player input.
-        
+
         Returns:
             Returns a tuple of tuples representing the coordinates for the start
-            and end coordinates for the ChessBoard class to implement. 
+            and end coordinates for the ChessBoard class to implement.
         """
         # first dict is files, second is ranks
         translation_dicts = self._translate_coords()

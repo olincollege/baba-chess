@@ -16,14 +16,14 @@ class ChessView(ABC):
         attribute.
         """
         self._board = board
-    
+
     @property
     def board(self):
         """
         Returns the Chess board stores in the Chess board instance.
         """
         return self._board
-    
+
     @abstractmethod
     def draw(self):
         """
