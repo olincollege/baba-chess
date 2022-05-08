@@ -18,7 +18,7 @@ To test the code, make sure that you are in the directory where your clone of th
 ====================== test session starts =======================
 platform linux -- Python 3.9.7, pytest-6.2.4, py-1.10.0,
 pluggy-0.13.1
-rootdir: /home/osalih/baba-chess
+rootdir: /home/user/baba-chess
 plugins: anyio-2.2.0
 collected 60 items
 

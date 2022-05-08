@@ -55,17 +55,17 @@ Testing the code is not necessary for game play, but to make sure that the code 
 
 Firstly, ensure that you are in the directory where the clone of this repository lives. Then run `pytest`. If all goes well you should see the following screen:
 ```
-================================================ test session starts ================================================
+============================================ test session starts =============================================
 platform linux -- Python 3.9.7, pytest-6.2.4, py-1.10.0, pluggy-0.13.1
-rootdir: /home/osalih/baba-chess
+rootdir: /home/user/baba-chess
 plugins: anyio-2.2.0
 collected 60 items
 
-test_chess_board.py ................................................                                          [ 80%]
-test_chess_controller.py .........                                                                            [ 95%]
-test_chess_view.py ...                                                                                        [100%]
+test_chess_board.py ................................................                                   [ 80%]
+test_chess_controller.py .........                                                                     [ 95%]
+test_chess_view.py ...                                                                                 [100%]
 
-================================================ 60 passed in 0.08s =================================================
+============================================ 60 passed in 0.08s ==============================================
 ```
 
 ## Play the Game
