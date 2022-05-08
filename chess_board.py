@@ -130,6 +130,16 @@ class ChessBoard:
             return "white"
         return "black"
 
+    def _opponent_color(self, piece):
+        """
+        Your docstring goes here.
+        """
+        if piece == " ":
+            return "blank"
+        if piece.isupper():
+            return "black"
+        return "white"
+
     def check_legal_move(self, start_pos, end_pos):
         """
         Your docstring goes here.
@@ -141,8 +151,7 @@ class ChessBoard:
         if piece in ["R", "r"]:
             legal_moves = self.check_rook_move(start_pos)
         if piece in ["N", "n"]:
-            #legal_moves = self.check_knight_move(start_pos)
-            pass
+            legal_moves = self.check_knight_move(start_pos)
         if piece in ["B", "b"]:
             #legal_moves = self.check_bishop_move(start_pos)
             pass
@@ -152,7 +161,7 @@ class ChessBoard:
         if piece in ["K", "k"]:
             #legal_moves = self.check_king_move(start_pos)
             pass
-        print(legal_moves)
+        # print(legal_moves)
         if end_pos not in legal_moves:
             print("Not a legal move!")
             raise ValueError
@@ -210,8 +219,18 @@ class ChessBoard:
                     break
         return moves
 
-    def check_knight_move(self, start_pos, end_pos):
-        pass
+    def check_knight_move(self, start_pos):
+        moves = []
+        row = start_pos[0]
+        col = start_pos[1]
+        in_L = [(1,2), (1,-2), (-1,2), (-1,-2), (2,1), (2,-1), (-2,1), (-2,-1)]
+        opp_color = self._opponent_color(self.get_piece(start_pos))
+        for direction in in_L:
+            test_pos = (row + direction[0], col + direction[1])
+            if self._in_bound(test_pos):
+                if self.piece_color(self.get_piece(test_pos)) in ["blank", opp_color]:
+                    moves.append(test_pos)
+        return moves
 
     def check_bishop_move(self, start_pos, end_pos):
         pass
