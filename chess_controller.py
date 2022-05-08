@@ -44,7 +44,7 @@ class TextController(ChessController):
         """
 
         try:
-            input_number = input("Input move, ie 'e2-e4': ")
+            input_number = input("Input your move ie. ('e2-e4'/undo/quit): ")
             # If the move inputted by the player is "quit", the game is over.
             if input_number == "quit" or input_number == "undo":
                 return input_number

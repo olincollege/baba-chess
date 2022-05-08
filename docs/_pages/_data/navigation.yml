@@ -1,0 +1,11 @@
+main:
+  - title: "Home"
+    url: /
+  - title: "Installation"
+    url: /installation
+  - title: "Rules"
+    url: /usage
+  - title: "About Us"
+    url: /about
+  - title: "Repo"
+    url: https://github.com/olincollege/baba-chess
