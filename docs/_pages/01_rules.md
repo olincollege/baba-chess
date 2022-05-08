@@ -8,8 +8,6 @@ order: 1
 Firstly, if you aren’t familiar with the rules of chess, specifically how chess pieces should and shouldn’t move [Learn Chess Here!](https://chess.org/rules?msclkid=93fbb98ace7c11eca3716e0e73ad05af)
 All of the pieces follow these basic move rules, with the exception that en passant captures, castling, and pawn promotions have not yet been implemented into this chess board. In order to make these moves, we are taking in Long Algebraic Notation. Below is a table that may be helpful for understanding the connection between standard algebraic notation and our coordinate-based long algebraic notation.
 
-(Insert another chart here)
-
 |Graphical Algebraic|Notation Standard Algebraic|Notation Long Algebraic Notation|
 |:-----------------:|:-------------------------:|:------------------------------:|
 |e4|e4|e2-e4|

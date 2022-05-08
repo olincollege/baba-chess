@@ -1,4 +1,4 @@
-# baba-chess (Rev.1.1)
+# baba-chess (Rev.1.2)
 Omar Salih, Arturo Joya, Drew Pang
 
 This repository contains the necessary files needed to run a game of Chess in Python.
@@ -24,7 +24,11 @@ Firstly, ensure that you are in the directory where the clone of this repository
 
 ## Play the Game
 The board is set up such that the uppercase letters represent the white player, and the lower case letters represent the black player. The current revision now takes in LAN (long algebraic notation). Note that we are using a simplified version of LAN, such that only the "spots" are noted. For example, to make the move e4 in standard algebraic notation, it would be `e2-e4` in our implementation. For the move Nf6 in standard algebraic notation, that move would be made with the input `g8-f6` which moves the piece at g8 (in this case the black knight) to the spot f6. Please refer to the table below for Chess notation translations.
-![Chess_notations_chart](./images/chessnotations.png)
+
+|Graphical Algebraic|Notation Standard Algebraic|Notation Long Algebraic Notation|
+|:-----------------:|:-------------------------:|:------------------------------:|
+|e4|e4|e2-e4|
+|♞f6|Nf6|g8-f6|
 
 *Note*, castling and pawn promotions have not been implemented yet, therefore those commands should not be attempted as they will result in an invalid-move-prompt.
 
@@ -33,7 +37,8 @@ While playing the game of chess, it is possible that an incorrect move is played
 This board implementation does not yet contain a check or checkmate checker; however, to quit the match, you may input `quit` to quit the match. Note that this match does not get saved, and thus the next time that the game is launched, it will be a brand new game.
 
 ## Future Implementations
-Rev.1.1 seeks to implement the following features:
+Rev.1.3 seeks to implement the following features:
 - Promote Pawn
 - Castle
+
 Coming soon...
