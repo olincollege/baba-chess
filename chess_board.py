@@ -155,12 +155,11 @@ class ChessBoard:
         if piece in ["B", "b"]:
             legal_moves = self.check_bishop_move(start_pos)
         if piece in ["Q", "q"]:
-            #legal_moves = self.check_queen_move(start_pos)
-            pass
+            legal_moves = self.check_queen_move(start_pos)
         if piece in ["K", "k"]:
             #legal_moves = self.check_king_move(start_pos)
             pass
-        #   print(legal_moves)
+        print(legal_moves)
         if end_pos not in legal_moves:
             print("Not a legal move!")
             raise ValueError
@@ -236,7 +235,7 @@ class ChessBoard:
         row = start_pos[0]
         col = start_pos[1]
         piece_color = self.piece_color(self.get_piece(start_pos))
-        diag = [(1,1), (-1,1), (1,-1), (-1,-1)] #define directions for movement
+        diag = [(1,1), (-1,1), (1,-1), (-1,-1)] # define directions for movement
         for direction in diag:
             for i in range(1,8):
                 test_pos = (row + i*direction[0], col +i*direction[1])
@@ -253,7 +252,27 @@ class ChessBoard:
         return moves
 
     def check_queen_move(self, start_pos):
-        pass
+        moves = []
+        row = start_pos[0]
+        col = start_pos[1]
+        orth = [(1,0), (-1,0), (0,1), (0,-1)] # define directions for movement
+        diag = [(1,1), (-1,1), (1,-1), (-1,-1)]
+        full = orth + diag
+        piece_color = self.piece_color(self.get_piece(start_pos))
+        for direction in full:
+            for i in range(1,8):
+                test_pos = (row + i*direction[0], col + i*direction[1])
+                if self._in_bound(test_pos):
+                    if self.get_piece(test_pos) == " ":
+                        moves.append(test_pos)
+                    if self.piece_color(self.get_piece(test_pos)) == piece_color:
+                        break
+                    if self.piece_color(self.get_piece(test_pos)) not in ["blank", piece_color]:
+                        moves.append(test_pos)
+                        break
+                else:
+                    break
+        return moves
 
     def check_king_move(self, start_pos):
         pass
