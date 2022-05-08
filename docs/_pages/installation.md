@@ -1,10 +1,8 @@
 ---
 title: Installation
 permalink: /installation/
-order: 2
 ---
-
-# Getting the game
+## A Small Warning
 Note - this chess board implementation has only been tested for gameplay in a Conda Environment in Ubuntu 20.04 and there is no guarantee that this implementation will work beyond its noted intended use and tested environments.
 The following instructions are written for installation, testing, and gameplay in the terminal.
 ## Step 1 - Clone
