@@ -17,7 +17,7 @@ class ChessBoard:
         _next_player: A string representing the color of the player to move.
         _moves_made: A list of tuples representing the moves that have been made.
         _pieces_captured: A list of single character strings representing the pieces that have been captured.
-        _undo_flag: An integer representing the 
+        _undo_flag: An integer representing the undo state of a move.
     """
 
     player_1_color = "white"
@@ -37,7 +37,11 @@ class ChessBoard:
 
     def fill_generic_board(self):
         """
-        Fill board with variables and create piece instances.
+        Fill chess board with piece string representations.
+
+        Uppercase strings represent white pieces, while lowercase strings
+        represent black pieces. Strings represent pieces as the following:
+        "R" = Rook, "N" = Knight, "B" = Bishop, "Q" = Queen, and "K" = King.
         """
         self._board[7] = ["R", "N", "B", "Q", "K", "B", "N", "R"] # White back row
         self._board[6] = ["P" for _ in range (8)] # White pawns
@@ -52,21 +56,7 @@ class ChessBoard:
         Returns:
             A string representing the next player's color (white or black).
         """
-        #TODO decide between representing the next player as a bool or a string.
-        #* Chose to represent next player as a string
         return self._next_player
-
-    # def _error_message(self):
-    #     """
-    #     Return the current error message of the chess board.
-
-    #     #TODO: Add a more descriptive docstring after legal move checker had
-    #     # been fully implemented.
-
-    #     Returns:
-    #         A string representing the current error for the chess board.
-    #     """
-    #     return self._error_message
     
     def _flip_next_move(self):
         """
@@ -79,13 +69,7 @@ class ChessBoard:
 
     def get_piece(self, pos):
         """
-        #TODO update this docstring
         Return the piece at the given square of the board.
-
-        The first character returned represents the piece type, while the second
-        is the nth piece of that type. When the first character is uppercase,
-        the piece is white, when the first character is lowercase, the piece is
-        black. "B2" describes the second white bishop.
 
         Args:
             pos: A tuple representing the position of a given square. The first
@@ -93,28 +77,21 @@ class ChessBoard:
         
         Returns:
             A string representing the piece at a given square. An empty string
-            is returned if a piece is empty.
+            is returned if a square is empty.
         """
         return self._board[pos[0]][pos[1]]
 
-    def is_occupied(self, pos):
+    def _in_bound(self, pos):
         """
-        Returns a bool for if a square is occupied.
+        Return a bool based on if a position is on the board.
 
         Args:
             pos: A tuple representing the position of a given square. The first
             number is the row, the second is the column.
 
         Returns:
-            True if a square is occupied and false if it is not.
-        """
-        if self._board[pos[0]][pos[1]] != " ":
-            return True
-        return False
-
-    def _in_bound(self, pos):
-        """
-        Your docsting here
+            A bool representing if a position is on the board. True if it is,
+            false if it is not. 
         """
         if pos[0] in range(0,8):
             if pos[1] in range(0,8):
@@ -123,16 +100,15 @@ class ChessBoard:
 
     def piece_color(self, piece):
         """
-        Returns a the color of a piece in a given square.
+        Return the color of a piece in a given square.
 
         Args:
-            Piece: A string representing a chess piece. Capitalization
-                determines the color of a piece, so"B" would represent a white
-                bishop while "b" would represent a black bishop. 
+            piece: A string representing a chess piece.
         
         Returns:
             A string representing the color of a given piece. "white" if the
-            piece is white, "black" if the piece is black. 
+            piece is white, "black" if the piece is black, and "blank" if
+            there is no piece at the given square. 
         """
         if piece == " ":
             return "blank"
@@ -142,7 +118,15 @@ class ChessBoard:
 
     def _opponent_color(self, piece):
         """
-        Your docstring goes here.
+        Return the opponent color of a piece in a given square.
+
+        Args:
+            piece: A string representing a chess piece.
+
+        Returns:
+            A string representing the opponent color of a given piece. "white"
+            if the piece is white, "black" if the piece is black, and "blank" if
+            there is no piece at the given square. 
         """
         if piece == " ":
             return "blank"
@@ -152,7 +136,14 @@ class ChessBoard:
 
     def check_legal_move(self, start_pos, end_pos):
         """
-        Your docstring goes here.
+        Based on a start and end position as well as the piece type, check the
+        legality of a move.
+
+        Args:
+            start_pos: A tuple representing the start position of the piece
+            being moved.
+            end_pos: A tuple representing the position the piece would like to
+            be moved to.
         """
         piece = self.get_piece(start_pos)
 
@@ -183,11 +174,19 @@ class ChessBoard:
             raise ValueError
 
     def check_pawn_move(self, start_pos):
+        """
+        Based on the start position of a pawn, return a list of legal moves.
+
+        Args:
+            start_pos: A tuple representing the start position of the pawn.
+
+        Returns:
+            A list of tuples representing the legal moves of the pawn.
+        """
         row = start_pos[0]
         col = start_pos[1]
         moves = []
         piece = self.get_piece(start_pos)
-        #TODO - Condense code 
         if self.piece_color(piece) == "white":
             if row == 6: #if first move, check the second square ahead
                 if self.get_piece((row - 2, col)) == " ": #TODO add check to make sure this does not jump a piece
@@ -215,6 +214,15 @@ class ChessBoard:
         return moves
 
     def check_rook_move(self, start_pos):
+        """
+        Based on the start position of a rook, return a list of legal moves.
+
+        Args:
+            start_pos: A tuple representing the start position of the rook.
+
+        Returns:
+            A list of tuples representing the legal moves of the pawn.
+        """
         moves = []
         row = start_pos[0]
         col = start_pos[1]
@@ -236,6 +244,15 @@ class ChessBoard:
         return moves
 
     def check_knight_move(self, start_pos):
+        """
+        Based on the start position of a knight, return a list of legal moves.
+
+        Args:
+            start_pos: A tuple representing the start position of the knight.
+
+        Returns:
+            A list of tuples representing the legal moves of the knight.
+        """
         moves = []
         row = start_pos[0]
         col = start_pos[1]
@@ -249,6 +266,15 @@ class ChessBoard:
         return moves
 
     def check_bishop_move(self, start_pos):
+        """
+        Based on the start position of a bishop, return a list of legal moves.
+
+        Args:
+            start_pos: A tuple representing the start position of the bishop.
+
+        Returns:
+            A list of tuples representing the legal moves of the bishop.
+        """
         moves = []
         row = start_pos[0]
         col = start_pos[1]
@@ -270,6 +296,15 @@ class ChessBoard:
         return moves
 
     def check_queen_move(self, start_pos):
+        """
+        Based on the start position of a queen, return a list of legal moves.
+
+        Args:
+            start_pos: A tuple representing the start position of the queen.
+
+        Returns:
+            A list of tuples representing the legal moves of the queen.
+        """
         moves = []
         row = start_pos[0]
         col = start_pos[1]
@@ -293,6 +328,15 @@ class ChessBoard:
         return moves
 
     def check_king_move(self, start_pos):
+        """
+        Based on the start position of a king, return a list of legal moves.
+
+        Args:
+            start_pos: A tuple representing the start position of the king.
+
+        Returns:
+            A list of tuples representing the legal moves of the king.
+        """
         moves = []
         row = start_pos[0]
         col = start_pos[1]
@@ -311,15 +355,16 @@ class ChessBoard:
         """
         Move a specified piece to a new location.
 
+        Additionally, if a move is not an undo move, run the legal move checker.
+
         Args:
-            start_pos: A tuple representing the location of the piece to move.
-            end_pos: A tuple representing the location to the move the piece to.
+            start_pos: A tuple representing the start position of the piece
+            being moved.
+            end_pos: A tuple representing the position the piece would like to
+            be moved to.
         """
         piece = self.get_piece(start_pos)
 
-        #TODO: Move both if statement into legal move checker and only run
-        # legal move checker when a move is not an undo move
-        # Check if piece is an opponent's piece or a blank square.
         if self._undo_flag == 0:
             # All-in-one legal move checker.
             self.check_legal_move(start_pos, end_pos)
@@ -338,10 +383,6 @@ class ChessBoard:
     def undo_move(self):
         """
         Given the start and end piece position, undo the previous move.
-
-        Args:
-            start_pos: A tuple representing the location of the piece before the move.
-            end_pos: A tuple representing the current location of the piece.
         """
         self._undo_flag = 1
         self.move_piece(self._moves_made[-1][1], self._moves_made[-1][0])
@@ -366,17 +407,3 @@ class ChessBoard:
             lines.append(row_divider)
         lines.append(files)
         return "\n".join(lines)
-        
-"""
-    flip next move
-
-    move    
-        take move from controller
-        pass to Pieces
-        give me list of possible pievce move
-        check if move is possible
-        update board
-        update piece instance 
-
-    
-"""
