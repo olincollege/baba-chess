@@ -61,7 +61,6 @@ if __name__ == "__main__":
 #         "black": TextController(board),
 #     }
 #     current_player = controllers[(board.next_player())]
-#     print(board.is_occupied((5, 0)))
-#     print(board.piece_color(board.get_piece((7,7))))
+#     print(board._in_bound((0, 8)))
 
 # board_move_test()
