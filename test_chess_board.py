@@ -338,7 +338,10 @@ def test_undo_move(board, game_repr): # pylint: disable=redefined-outer-name
     moves, board_repr = game_repr
     for start, end in moves:  # pylint: disable=redefined-outer-name
         board.move_piece(start, end)
-    board.move_piece((6,7),(5,7)) # a move to be undone
+    if board.next_player() == "black":
+        board.move_piece((1,0),(2,0)) # a move to be undone
+    else:
+        board.move_piece((6,7),(5,7)) # a move to be undone
     board.undo_move()
     assert str(board) == board_repr
 
