@@ -34,7 +34,7 @@ The text based format allows us to display our game pieces in many different env
 
 Check out sample gameplay here:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/orDw_IegEeM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=dHa9fJq6K_o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ## License: MIT License
