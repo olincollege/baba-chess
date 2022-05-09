@@ -49,16 +49,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# def board_move_test():
-#     #set up MVC components for an instance of chess
-#     board = ChessBoard()
-#     view = TextView(board)
-#     controllers = {
-#         "white": TextController(board),
-#         "black": TextController(board),
-#     }
-#     current_player = controllers[(board.next_player())]
-#     print(board._in_bound((0, 8)))
-
-# board_move_test()
