@@ -88,3 +88,5 @@ Rev.1.3 seeks to implement the following features:
 - Castle
 
 Coming soon...
+
+For a more in-depth view of the game and its functionality, check out our video [Here!](https://www.youtube.com/watch?v=dHa9fJq6K_o)
