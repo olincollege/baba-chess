@@ -32,9 +32,9 @@ The text based format allows us to display our game pieces in many different env
 |White|P|N|B|R|Q|K|
 {: rules="groups"}
 
-Check out sample gameplay here:
+Check out more information here:
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=dHa9fJq6K_o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dHa9fJq6K_o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 ## License: MIT License
